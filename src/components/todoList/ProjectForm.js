@@ -1,13 +1,13 @@
 import React, { Component } from 'react';
 
-class TodoForm extends Component {
+class ProjectForm extends Component {
   constructor(props){
     super(props);
-    this.state = {todoItem: ''}
+    this.state = {task: ''}
   }
 
   handleChange(e){
-    this.setState({todoItem: e.target.value})
+    this.setState({task: e.target.value})
   }
 
   handleSubmit(){
@@ -17,8 +17,8 @@ class TodoForm extends Component {
   render(){
     return (
       <div>
-        <form className="todoForm">
-          <input type="text" value={this.state.todoItem}
+        <form className="project-form">
+          <input type="text" value={this.state.task}
                  onChange={this.handleChange}
                  onSubmit={this.handleSubmot}
                  placeholder="Please type your todo name"/>
@@ -28,4 +28,4 @@ class TodoForm extends Component {
   }
 }
 
-export default TodoForm
+export default ProjectForm

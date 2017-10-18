@@ -1,11 +1,11 @@
-ul.todoList {
+#project-list {
     margin: 0 auto;
     padding: 5px;
     border: 1px solid 5571FF;
     background-color: aquamarine;
 }
 
-.todoItem {
+.task {
     width: auto;
     height: 20px;
     background-color: aqua;
