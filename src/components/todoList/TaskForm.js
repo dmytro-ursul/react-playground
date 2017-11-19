@@ -4,6 +4,7 @@ class TaskForm extends Component {
   constructor(props){
     super(props);
     this.state = {task: ''}
+    this.handleChange = this.handleChange.bind(this);
   }
 
   handleChange(e){

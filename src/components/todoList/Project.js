@@ -12,8 +12,8 @@ class Project extends Component {
     }
   }
 
-  createTask(){
-    //debuggeer;
+  createTask(e){
+    e.target.value
   }
 
   componentDidMount(){
@@ -22,7 +22,7 @@ class Project extends Component {
 
   render() {
     return (
-      <div>
+      <div className="project">
         <ProjectHeader name={this.state.name}></ProjectHeader>
         <TaskForm></TaskForm>
         <ul className="task-list">

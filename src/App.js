@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import TodoList from './components/todoList/TodoList';
+// import { createStore } from 'redux'
 
 
 const tasks1 = [
@@ -24,7 +25,7 @@ class App extends Component {
         <TodoList projects={projects}></TodoList>
       </div>
     );
-}
+  }
 }
 
 export default App;

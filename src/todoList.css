@@ -2,7 +2,21 @@
     margin: 0 auto;
     padding: 5px;
     border: 1px solid 5571FF;
-    background-color: aquamarine;
+    width: 300px;
+}
+
+.project{
+    padding: 5px;
+    background-color: #f6f9c6;
+    margin-bottom: 5px;
+}
+
+.project-header{
+    background-color: #79bcd8;
+}
+
+ul.task-list{
+    padding: 5px;
 }
 
 .task {
@@ -10,4 +24,5 @@
     height: 20px;
     background-color: aqua;
     margin-top: 3px;
+    list-style-type: none;
 }
