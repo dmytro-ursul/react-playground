@@ -12,7 +12,7 @@ class TaskForm extends Component {
   }
 
   handleSubmit(){
-
+    
   }
 
   render(){
@@ -21,7 +21,7 @@ class TaskForm extends Component {
         <form className="task-form">
           <input type="text" value={this.state.task}
                  onChange={this.handleChange}
-                 onSubmit={this.handleSubmot}
+                 onSubmit={this.handleSubmit}
                  placeholder="Please type your todo name"/>
         </form>
       </div>
