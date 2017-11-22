@@ -20,7 +20,7 @@ class ProjectForm extends Component {
         <form className="project-form">
           <input type="text" value={this.state.task}
                  onChange={this.handleChange}
-                 onSubmit={this.handleSubmot}
+                 onSubmit={this.handleSubmit}
                  placeholder="Please type your todo name"/>
         </form>
       </div>
@@ -28,4 +28,4 @@ class ProjectForm extends Component {
   }
 }
 
-export default ProjectForm
+export default ProjectForm;
