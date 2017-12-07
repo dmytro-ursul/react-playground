@@ -9,10 +9,12 @@ const tasks = (state = [], action) => {
                     completed: action.completed
                 }
             ]
-        case 'REMOVE_TODO':
+        case 'REMOVE_TASK':
             return []
         default:
             return state
 
     }
-}
+};
+
+export default tasks

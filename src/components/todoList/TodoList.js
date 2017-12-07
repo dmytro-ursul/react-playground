@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import Project from './Project.js';
-import Task from "./Task.js";
+import { connect } from 'react-redux'
 
 class TodoList extends Component {
   constructor(props){
@@ -23,5 +23,7 @@ class TodoList extends Component {
     );
   }
 }
+
+TodoList = connect()(TodoList);
 
 export default TodoList;

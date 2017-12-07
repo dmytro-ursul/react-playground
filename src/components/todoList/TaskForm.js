@@ -1,16 +1,17 @@
 import React, { Component } from 'react';
 import { createTask } from './actions'
+import { connect } from 'react-redux'
+
 
 class TaskForm extends Component {
-  constructor(props){
-    super(props);
-    this.dispatch = props.dispatch
+  constructor({ dispatch }){
+    super({ dispatch });
+    this.dispatch = dispatch;
     this.input = null;
     this.handleChange = this.handleChange.bind(this);
   }
 
   handleChange(e){
-    // this.setState({task: e.target.value})
   }
 
   handleSubmit(){
@@ -32,5 +33,7 @@ class TaskForm extends Component {
     )
   }
 }
+
+TaskForm = connect()(TaskForm);
 
 export default TaskForm

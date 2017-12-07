@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import ProjectHeader from './ProjectHeader.js';
 import TaskForm from "./TaskForm.js";
 import Task from './Task.js';
+import { connect } from 'react-redux'
 
 class Project extends Component {
   constructor(props){
@@ -34,5 +35,7 @@ class Project extends Component {
     );
   }
 }
+
+Project = connect()(Project);
 
 export default Project;
