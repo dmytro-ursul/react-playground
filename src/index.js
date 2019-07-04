@@ -14,8 +14,8 @@ import registerServiceWorker from './registerServiceWorker';
 const store = createStore(reducer);
 
 ReactDOM.render(
-  <Provider>
-    <App store={store}/>
+  <Provider store={store}>
+    <App/>
   </Provider>,
   document.getElementById('root')
 )

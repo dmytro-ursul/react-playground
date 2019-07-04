@@ -9,12 +9,11 @@ class Project extends Component {
     super(props)
     this.state = {
       name: props.project.name,
-      tasks: props.project.tasks,
+      tasks: props.project.tasks
     }
   }
 
   createTask(e){
-    e.target.value
   }
 
   componentDidMount(){

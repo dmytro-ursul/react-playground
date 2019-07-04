@@ -4,14 +4,10 @@ import { connect } from 'react-redux'
 
 
 class TaskForm extends Component {
-  constructor({ dispatch }){
-    super({ dispatch });
-    this.dispatch = dispatch;
-    this.input = null;
-    this.handleChange = this.handleChange.bind(this);
-  }
-
-  handleChange(e){
+  constructor(props){
+    super(props);
+    this.dispatch = props.dispatch;
+    this.textInput = React.createRef();
   }
 
   handleSubmit(){
@@ -21,13 +17,11 @@ class TaskForm extends Component {
   render(){
     return (
       <div>
-        <form className="task-form" onSubmit={this.handleSubmit}>
+        <form className="task-form" onSubmit={ this.handleSubmiti }>
           <input type="text"
-                 ref={node => {
-                   this.input = node
-                 }}
-                 onChange={this.handleChange}
+                 ref={ this.textInput }
                  placeholder="Please enter task name"/>
+	  <input type="button" value="add task" onClick={ this.handleSubmit } />
         </form>
       </div>
     )
