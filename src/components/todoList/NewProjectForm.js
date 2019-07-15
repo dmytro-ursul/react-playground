@@ -3,16 +3,24 @@ import React, { Component } from 'react';
 class NewProjectForm extends Component {
   constructor(props){
     super(props)
-    this.state = {
-      name: props.project.name
-    }
+    this.name = '';
+    this.projects = this.props.projects;
+    this.projectNameInput = React.createRef();
+  }
+
+  componentDidMount() {
+    this.projectNameInput.current.focus();
+  }
+
+  onSubmit(event) {
+    this.props.AddNewProject(event.target.value)
   }
   render() {
     return (
-      <div className="App">
-        <input placeholder="project_name" value={this.state.name}/>
+      <form onSubmit={this.onSubmit} id="new-project-form">
+	<input ref={this.projectNameInput} placeholder="Enter new project name" value={this.name}/>
         <button>add project</button>	   
-      </div>
+      </form>
     );
   }
 }
