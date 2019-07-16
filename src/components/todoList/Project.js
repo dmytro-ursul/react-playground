@@ -9,7 +9,7 @@ class Project extends Component {
     super(props)
     this.state = {
       name: props.project.name,
-      tasks: props.project.tasks
+      tasks: props.project.items
     }
   }
 

@@ -17,7 +17,7 @@ class TaskForm extends Component {
   render(){
     return (
       <div>
-        <form className="task-form" onSubmit={ this.handleSubmiti }>
+        <form className="task-form" onSubmit={ this.handleSubmit }>
           <input type="text"
                  ref={ this.textInput }
                  placeholder="Please enter task name"/>

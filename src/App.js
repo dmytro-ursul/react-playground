@@ -10,27 +10,34 @@ class App extends Component {
     super(props);
     this.state = {
       projects: []
-    };
-  };
+		};
+		this.addNewProject = this.addNewProject.bind(this);
+  }
 
-  addNewProject = (name) => {
-    const project = { name, items: [] }
-    const projects = [...this.state.projects, project]
-    this.setState({projects})
-  };
+  addNewProject(name) {
+		const project = {
+			name,
+			id: Math.random(),
+			items: []
+		};
+    const projects = [...this.state.projects, project];
+    this.setState({projects});
+  }
 
   render() {
+		let projectList = null;
+		if (this.state.projects.length === 0){
+			projectList = <p>nothing to show</p>;
+		} else {
+			projectList = <TodoList projects={this.state.projects}></TodoList>;
+		}
     return (
       <div className="App">
-        <NewProjectForm></NewProjectForm>
-	if (projects.length == 0){
-	  <p>nothing to show</p>
-	} else {
-	  <TodoList projects={this.state.projects}></TodoList>
-	}
+        <NewProjectForm addNewProject={this.addNewProject}> </NewProjectForm>
+				{ projectList }
       </div>
     );
-  };
+  }
 }
 
 export default App;

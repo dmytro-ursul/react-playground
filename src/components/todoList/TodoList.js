@@ -8,11 +8,16 @@ class TodoList extends Component {
     this.state = { projects: props.projects };
   }
 
-  createProject(){
+  createProject() {
     //debugger;
   }
 
+	deleteProject() {
+
+	}
+
   render() {
+		this.state.projects = this.props.projects;
     const projects = this.state.projects.map((project) =>
       <Project project={project} key={project.id}/>
     );
