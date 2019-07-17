@@ -12,8 +12,8 @@ class TodoList extends Component {
     //debugger;
   }
 
-	deleteProject() {
-
+  deleteProject(e) {
+    this.props.deleteProject(e.target.key)
 	}
 
   render() {

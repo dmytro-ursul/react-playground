@@ -9,9 +9,10 @@ class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      projects: []
+      projects: [ {id: 12345, name: 'initial', items:[]} ]
 		};
 		this.addNewProject = this.addNewProject.bind(this);
+		this.deleteProject = this.deleteProject.bind(this);
   }
 
   addNewProject(name) {
@@ -24,12 +25,18 @@ class App extends Component {
     this.setState({projects});
   }
 
+  deleteProject(id){
+    this.state.projects.filter((project) =>
+      project.id !== id
+    )
+  }
+
   render() {
 		let projectList = null;
 		if (this.state.projects.length === 0){
 			projectList = <p>nothing to show</p>;
 		} else {
-			projectList = <TodoList projects={this.state.projects}></TodoList>;
+			projectList = <TodoList projects={this.state.projects} deleteProject={this.deleteProject}></TodoList>;
 		}
     return (
       <div className="App">
