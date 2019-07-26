@@ -17,14 +17,14 @@ class Project extends Component {
   }
 
   render() {
-		let { name, items } = this.props
+		let { id, name, items } = this.props
     return (
       <div className="project">
-        <ProjectHeader name={name}></ProjectHeader>
-        <TaskForm></TaskForm>
+				<ProjectHeader name={name} id={id} />
+				<TaskForm />
         <ul className="task-list">
           {items.map((task) =>
-            <Task name={task.name} key={task.id}></Task>
+						<Task name={task.name} key={task.id} />
           )}
         </ul>
       </div>

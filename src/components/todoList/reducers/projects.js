@@ -11,7 +11,9 @@ const projects = (state = initialState, action) => {
         }
       ]
     case 'REMOVE_PROJECT':
-      return []
+			return state.filter(project =>
+				project.id !== action.id
+			)
     default:
       return state
   }

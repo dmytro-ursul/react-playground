@@ -16,8 +16,8 @@ class TodoList extends Component {
 
   render() {
 		let { projects } = this.props;
-    const projectList = projects.map((project) =>
-      <Project items={[]} name={project.name} key={project.id}/>
+    const projectList = projects.map(project =>
+      <Project key={project.id} id={project.id} items={[]} name={project.name} />
     );
     return (
       <div id="project-list">

@@ -1,18 +1,21 @@
 import React, { Component } from 'react';
+import { removeProject } from './actions';
+import { connect } from 'react-redux';
 
 class ProjectHeader extends Component {
-  constructor(props){
-    super(props);
-    this.state = {
-      name: props.name
-    }
-  }
+  // constructor(props){
+  //   super(props);
+  // }
 
-  render(){
+	render(){
+		let { name, id, removeProject } = this.props;
     return (
-      <div className="project-header">{this.state.name}</div>
+			<div className="project-header">
+				{name}
+				<span className="delete-project" onClick={() => removeProject(id)}>x</span>
+			</div>
     )
   }
 }
 
-export default ProjectHeader
+export default connect(null, { removeProject })(ProjectHeader)
