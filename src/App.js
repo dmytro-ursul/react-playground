@@ -11,11 +11,10 @@ class App extends Component {
     this.state = {
       projects: [ {id: 12345, name: 'initial', items:[]} ]
 		};
-		this.addNewProject = this.addNewProject.bind(this);
 		this.deleteProject = this.deleteProject.bind(this);
   }
 
-  addNewProject(name) {
+  addProject(name) {
 		const project = {
 			name,
 			id: Math.random(),
@@ -40,7 +39,7 @@ class App extends Component {
 		}
     return (
       <div className="App">
-        <NewProjectForm addNewProject={this.addNewProject}> </NewProjectForm>
+				<NewProjectForm />
 				{ projectList }
       </div>
     );

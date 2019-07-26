@@ -5,13 +5,9 @@ import Task from './Task.js';
 import { connect } from 'react-redux'
 
 class Project extends Component {
-  constructor(props){
-    super(props)
-    this.state = {
-      name: props.project.name,
-      tasks: props.project.items
-    }
-  }
+  // constructor(props){
+  //   super(props)
+  // }
 
   createTask(e){
   }
@@ -21,12 +17,13 @@ class Project extends Component {
   }
 
   render() {
+		let { name, items } = this.props
     return (
       <div className="project">
-        <ProjectHeader name={this.state.name}></ProjectHeader>
+        <ProjectHeader name={name}></ProjectHeader>
         <TaskForm></TaskForm>
         <ul className="task-list">
-          {this.state.tasks.map((task) =>
+          {items.map((task) =>
             <Task name={task.name} key={task.id}></Task>
           )}
         </ul>

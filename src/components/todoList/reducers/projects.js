@@ -1,6 +1,8 @@
-const projects = (state = [], action) => {
+let initialState = [ {id: 12345, name: 'initial', items:[]} ];
+
+const projects = (state = initialState, action) => {
   switch(action.type) {
-    case 'CREATE_PROJECT':
+    case 'ADD_PROJECT':
       return [
         ...state,
         {
