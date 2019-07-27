@@ -1,7 +1,7 @@
-let initialState = [ {id: 12345, name: 'initial', items:[]} ];
+let initialState = [{ id: 12345, name: 'initial', items: [] }]
 
 const projects = (state = initialState, action) => {
-  switch(action.type) {
+  switch (action.type) {
     case 'ADD_PROJECT':
       return [
         ...state,
@@ -11,12 +11,10 @@ const projects = (state = initialState, action) => {
         }
       ]
     case 'REMOVE_PROJECT':
-			return state.filter(project =>
-				project.id !== action.id
-			)
+      return state.filter(project => project.id !== action.id)
     default:
       return state
   }
-};
+}
 
 export default projects

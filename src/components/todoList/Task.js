@@ -1,17 +1,10 @@
-import React, { Component } from 'react';
+import React, { Component } from 'react'
 
 class Task extends Component {
-  constructor(props){
-    super(props);
-    this.state ={
-      name: props.name,
-    };
-  }
+  render() {
+    let { name } = this.props.name
 
-  render(){
-    return (
-      <li className="task">{this.state.name}</li>
-    )
+    return <li className="task">{name}</li>
   }
 }
 

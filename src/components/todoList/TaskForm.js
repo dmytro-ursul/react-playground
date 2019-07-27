@@ -1,33 +1,43 @@
-import React, { Component } from 'react';
-import { createTask } from './actions'
+import React, { Component } from 'react'
+import { addTask } from './actions'
 import { connect } from 'react-redux'
 
-
 class TaskForm extends Component {
-  constructor(props){
-    super(props);
-    this.dispatch = props.dispatch;
-    this.textInput = React.createRef();
+  constructor(props) {
+    super(props)
+    this.textInput = React.createRef()
+    this.state = { name: '' }
   }
 
-  handleSubmit(){
-    this.dispatch(createTask(this.input.value))
+  handleSubmit = event => {
+    event.preventDefault()
+    let name = this.state
+    let project_id = this.props.project_id
+    this.props.addTask(name, project_id)
+    this.setState({ name: '' })
   }
 
-  render(){
+  onChange = event => {
+    this.setState({ name: event.target.value })
+  }
+
+  render() {
     return (
-      <div>
-        <form className="task-form" onSubmit={ this.handleSubmit }>
-          <input type="text"
-                 ref={ this.textInput }
-                 placeholder="Please enter task name"/>
-	  <input type="button" value="add task" onClick={ this.handleSubmit } />
-        </form>
-      </div>
+      <form className="task-form" onSubmit={this.handleSubmit}>
+        <input
+          type="text"
+          ref={this.textInput}
+          value={this.state.name}
+          onChange={this.onChange}
+          placeholder="Please enter task name"
+        />
+        <input type="button" value="add task" onClick={this.handleSubmit} />
+      </form>
     )
   }
 }
 
-TaskForm = connect()(TaskForm);
-
-export default TaskForm
+export default connect(
+  null,
+  { addTask }
+)(TaskForm)

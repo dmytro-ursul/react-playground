@@ -1,5 +1,5 @@
-import React, { Component } from 'react';
-import Project from './Project.js';
+import React, { Component } from 'react'
+import Project from './Project.js'
 import { connect } from 'react-redux'
 // import { dispatch } from 'redux'
 // import * as TodoActionCreators from './actions'
@@ -9,28 +9,24 @@ class TodoList extends Component {
   //   super(props)
   // }
 
-
   deleteProject(e) {
     this.props.deleteProject(e.target.key)
-	}
+  }
 
   render() {
-		let { projects } = this.props;
-    const projectList = projects.map(project =>
-      <Project key={project.id} id={project.id} items={[]} name={project.name} />
-    );
-    return (
-      <div id="project-list">
-        {projectList}
-      </div>
-    );
+    let { projects } = this.props
+    const projectList = projects.map(project => (
+      <Project key={project.id} id={project.id} name={project.name} />
+    ))
+    return <div id="project-list">{projectList}</div>
   }
 }
 
 const mapStateToProps = state => ({
-	projects: state.projects
+  projects: state.projects
 })
 
-TodoList = connect(mapStateToProps, null)(TodoList);
-
-export default TodoList;
+export default connect(
+  mapStateToProps,
+  null
+)(TodoList)
