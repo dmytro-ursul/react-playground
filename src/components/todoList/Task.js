@@ -8,7 +8,7 @@ class Task extends Component {
 
     return (
       <li>
-        <p className="task">name</p>
+        <p className="task">{ name }</p>
         <span clasName="remove-item" onClick={ () => removeTask(id) }>x</span>
       </li>
     )
