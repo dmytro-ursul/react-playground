@@ -14,18 +14,18 @@ class Project extends Component {
       <div className="project">
         <ProjectHeader name={name} id={id} />
         <TaskForm project_id={id} />
-        <ul className="task-list">
+        <div className="task-list">
           {items.map(task => (
-            <Task name={task.name} key={task.id} />
+            <Task name={task.name} id={task.id} key={task.id} />
           ))}
-        </ul>
+        </div>
       </div>
     )
   }
 }
 
 const mapStateToProps = (state, ownProps) => ({
-  items: state.tasks.filter(task => task.project_id == ownProps.id)
+  items: state.tasks.filter(task => task.project_id === ownProps.id)
 })
 
 export default connect(

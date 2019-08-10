@@ -12,7 +12,7 @@ class ProjectHeader extends Component {
     return (
       <div className="project-header">
         {name}
-        <span className="delete-project" onClick={() => removeProject(id)}>
+        <span className="remove-item" onClick={() => removeProject(id)}>
           x
         </span>
       </div>

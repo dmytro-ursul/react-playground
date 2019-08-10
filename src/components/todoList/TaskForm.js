@@ -11,8 +11,8 @@ class TaskForm extends Component {
 
   handleSubmit = event => {
     event.preventDefault()
-    let name = this.state
-    let project_id = this.props.project_id
+    let { name } = this.state
+    let { project_id } = this.props
     this.props.addTask(name, project_id)
     this.setState({ name: '' })
   }
