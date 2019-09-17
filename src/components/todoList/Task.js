@@ -18,7 +18,7 @@ class Task extends Component {
 
   onSubmit = event => {
     event.preventDefault()
-    this.props.updateTask(this.state.name)
+    this.props.updateTask(this.props.id, this.state.name)
     this.setState({isEditing: false})
   }
 

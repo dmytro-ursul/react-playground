@@ -1,17 +1,46 @@
 import React, { Component } from 'react'
-import { removeProject } from './actions'
+import { removeProject, updateProject } from './actions'
 import { connect } from 'react-redux'
 
 class ProjectHeader extends Component {
-  // constructor(props){
-  //   super(props);
-  // }
+
+  constructor(props){
+    super(props);
+    this.state = {
+      isEditing: false,
+      name: props.name
+    }
+  }
+
+  onChange = event => {
+    this.setState({name: event.target.value})
+  }
+
+  onSubmit = event => {
+    event.preventDefault()
+    this.props.updateProject(this.props.name, this.state.name)
+    this.setState({isEditing: false})
+  }
+
+  editProject = () => {
+    this.setState({isEditing: true})
+  }
 
   render() {
-    let { name, id, removeProject } = this.props
+
+    let { id, removeProject } = this.props
+
     return (
       <div className="project-header">
-        {name}
+          { this.state.isEditing ?
+                      <form onSubmit={this.onSubmit}>
+                        <input className="editProject"
+                               autoFocus={true}
+                               value={this.state.name}
+                               onChange={this.onChange}/>
+                       </form>
+                     : <p className="project-name" onClick={this.editProject}>{ this.state.name }</p>
+        }
         <span className="remove-item" onClick={() => removeProject(id)}>
           x
         </span>
@@ -22,5 +51,5 @@ class ProjectHeader extends Component {
 
 export default connect(
   null,
-  { removeProject }
+  { removeProject, updateProject }
 )(ProjectHeader)
