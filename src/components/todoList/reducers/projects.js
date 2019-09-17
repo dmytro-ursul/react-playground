@@ -12,7 +12,7 @@ const projects = (state = initialState, action) => {
       ]
     case 'REMOVE_PROJECT':
       return state.filter(project => project.id !== action.id)
-    case 'UPDATE_TASK':
+    case 'UPDATE_PROJECT':
       return state.map(project =>
         project.id === action.id ?
           {...project, name: action.name} :
