@@ -12,6 +12,12 @@ const tasks = (state = [], action) => {
       ]
     case 'REMOVE_TASK':
       return state.filter(task => task.id !== action.id)
+    case 'UPDATE_TASK':
+      return state.map(task =>
+        task.id === action.id ?
+          {...task, name: action.name} :
+          task
+      )
     default:
       return state
   }

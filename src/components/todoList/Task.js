@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import { removeTask } from './actions'
+import { removeTask, updateTask } from './actions'
 
 class Task extends Component {
 
@@ -12,8 +12,14 @@ class Task extends Component {
     }
   }
 
-  onChange = (event) => {
+  onChange = event => {
     this.setState({name: event.target.value})
+  }
+
+  onSubmit = event => {
+    event.preventDefault()
+    this.props.updateTask(this.state.name)
+    this.setState({isEditing: false})
   }
 
   editTask = () => {
@@ -21,12 +27,17 @@ class Task extends Component {
   }
 
   render() {
-    let { name, id, removeTask } = this.props
+    let { id, removeTask } = this.props
 
     return (
       <li>
-          { this.state.isEditing ? <input className="editTask" value={this.state.name} onChange={this.onChange}/>
-                                 : <p className="task" onClick={this.editTask}>{ name }</p> }
+          { this.state.isEditing ? <form onSubmit={this.onSubmit}>
+                                      <input className="editTask"
+                                             autoFocus={true}
+                                             value={this.state.name}
+                                             onChange={this.onChange}/>
+                                   </form>
+                                 : <p className="task" onClick={this.editTask}>{ this.state.name }</p> }
         <span className="remove-item" onClick={ () => removeTask(id) }>x</span>
       </li>
     )
@@ -35,5 +46,5 @@ class Task extends Component {
 
 export default connect(
   null,
-  { removeTask }
+  { removeTask, updateTask }
 )(Task)
