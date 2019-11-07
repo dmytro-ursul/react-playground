@@ -11,7 +11,11 @@ import reducer from './components/todoList/reducers'
 
 import registerServiceWorker from './registerServiceWorker';
 
-const store = createStore(reducer);
+let initialState = {
+  projects: [ {id: 12345, name: 'initial', items: []} ]
+}
+
+const store = createStore(reducer, initialState);
 
 ReactDOM.render(
   <Provider store={store}>

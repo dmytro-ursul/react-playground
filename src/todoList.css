@@ -23,7 +23,6 @@ ul.task-list{
   width: auto;
   height: 20px;
   display: inline-block;
-  background-color: aqua;
   margin-top: 3px;
   list-style-type: none;
 }

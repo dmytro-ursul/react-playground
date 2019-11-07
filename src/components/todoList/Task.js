@@ -30,7 +30,7 @@ class Task extends Component {
     let { id, removeTask } = this.props
 
     return (
-      <li>
+      <div>
           { this.state.isEditing ? <form onSubmit={this.onSubmit}>
                                       <input className="editTask"
                                              autoFocus={true}
@@ -39,7 +39,7 @@ class Task extends Component {
                                    </form>
                                  : <p className="task" onClick={this.editTask}>{ this.state.name }</p> }
         <span className="remove-item" onClick={ () => removeTask(id) }>x</span>
-      </li>
+      </div>
     )
   }
 }
