@@ -10,12 +10,15 @@ import { Provider } from 'react-redux'
 import reducer from './components/todoList/reducers'
 
 import registerServiceWorker from './registerServiceWorker';
+import { loadState, saveState } from './localStorage'
 
-let initialState = {
-  projects: [ {id: 12345, name: 'initial', items: []} ]
-}
+const persistedState = loadState();
 
-const store = createStore(reducer, initialState);
+const store = createStore(reducer, persistedState);
+
+store.subscribe(() => {
+  saveState(store.getState());
+})
 
 ReactDOM.render(
   <Provider store={store}>

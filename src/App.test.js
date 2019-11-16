@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom';
 import App from './App';
 import { Provider } from 'react-redux'
 import { createStore } from 'redux'
+import { shallow } from 'enzyme';
 import reducer from './components/todoList/reducers'
 
 let initialState = {
@@ -20,4 +21,8 @@ it('renders without crashing', () => {
     </Provider>,
     div
   );
+});
+
+it('shallow renders without crashing', () => {
+  shallow(<App />);
 });

@@ -18,7 +18,7 @@ class ProjectHeader extends Component {
 
   onSubmit = event => {
     event.preventDefault()
-    this.props.updateProject(this.props.name, this.state.name)
+    this.props.updateProject(this.props.id, this.state.name)
     this.setState({isEditing: false})
   }
 
