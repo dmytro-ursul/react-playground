@@ -19,12 +19,24 @@ ul.task-list{
   padding: 5px;
 }
 
+form {
+  display: inline-block
+}
+
+.project-name {
+  margin: auto
+}
+
 .task {
   width: auto;
   height: 20px;
   display: inline-block;
   margin-top: 3px;
   list-style-type: none;
+}
+
+input {
+  margin: 5px
 }
 
 .remove-item {

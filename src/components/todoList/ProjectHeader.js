@@ -33,17 +33,19 @@ class ProjectHeader extends Component {
     return (
       <div className="project-header">
           { this.state.isEditing ?
-                      <form onSubmit={this.onSubmit}>
-                        <input className="editProject"
-                               autoFocus={true}
-                               value={this.state.name}
-                               onChange={this.onChange}/>
-                       </form>
-                     : <p className="project-name" onClick={this.editProject}>{ this.state.name }</p>
+	      <form onSubmit={this.onSubmit}>
+		<input className="editProject"
+		       autoFocus={true}
+		       value={this.state.name}
+		       onChange={this.onChange}/>
+	       </form>
+	      : <p className="project-name" onClick={this.editProject}>
+		  { this.state.name }
+		  <span className="remove-item" onClick={() => removeProject(id)}>
+		    x
+		  </span>
+		</p>
         }
-        <span className="remove-item" onClick={() => removeProject(id)}>
-          x
-        </span>
       </div>
     )
   }
