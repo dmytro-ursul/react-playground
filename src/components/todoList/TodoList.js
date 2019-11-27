@@ -9,10 +9,6 @@ class TodoList extends Component {
   //   super(props)
   // }
 
-  deleteProject(e) {
-    this.props.deleteProject(e.target.key)
-  }
-
   render() {
     let { projects } = this.props
     const projectList = projects.map(project => (

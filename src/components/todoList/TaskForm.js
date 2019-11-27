@@ -5,7 +5,6 @@ import { connect } from 'react-redux'
 class TaskForm extends Component {
   constructor(props) {
     super(props)
-    this.textInput = React.createRef()
     this.state = { name: '' }
   }
 
@@ -26,7 +25,6 @@ class TaskForm extends Component {
       <form className="task-form" onSubmit={this.handleSubmit}>
         <input
           type="text"
-          ref={this.textInput}
           value={this.state.name}
           onChange={this.onChange}
           placeholder="Please enter task name"
