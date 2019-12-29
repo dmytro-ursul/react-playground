@@ -5,21 +5,19 @@ const projects = (state = [], action) => {
         ...state,
         {
           id: action.id,
-          name: action.name
-        }
-      ]
+          name: action.name,
+        },
+      ];
     case 'REMOVE_PROJECT':
-      return state.filter(project => project.id !== action.id)
+      return state.filter((project) => project.id !== action.id);
     case 'UPDATE_PROJECT':
-      return state.map(project =>
-        project.id === action.id ?
-          {...project, name: action.name} :
-          project
-      )
+      return state.map((project) => (project.id === action.id
+        ? { ...project, name: action.name }
+        : project));
 
     default:
-      return state
+      return state;
   }
-}
+};
 
-export default projects
+export default projects;

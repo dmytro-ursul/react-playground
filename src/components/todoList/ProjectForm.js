@@ -1,13 +1,13 @@
-import React, { Component } from 'react'
+import React, { Component } from 'react';
 
 class ProjectForm extends Component {
   constructor(props) {
-    super(props)
-    this.state = { task: '' }
+    super(props);
+    this.state = { task: '' };
   }
 
   handleChange(e) {
-    this.setState({ task: e.target.value })
+    this.setState({ task: e.target.value });
   }
 
   handleSubmit() {}
@@ -25,8 +25,8 @@ class ProjectForm extends Component {
           />
         </form>
       </div>
-    )
+    );
   }
 }
 
-export default ProjectForm
+export default ProjectForm;

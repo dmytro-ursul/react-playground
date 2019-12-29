@@ -1,14 +1,14 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import App from './App';
-import { Provider } from 'react-redux'
-import { createStore } from 'redux'
+import { Provider } from 'react-redux';
+import { createStore } from 'redux';
 import { shallow } from 'enzyme';
-import reducer from './components/todoList/reducers'
+import App from './App';
+import reducer from './components/todoList/reducers';
 
-let initialState = {
-  projects: [ {id: 12345, name: 'initial', items: []} ]
-}
+const initialState = {
+  projects: [{ id: 12345, name: 'initial', items: [] }],
+};
 
 const store = createStore(reducer, initialState);
 
@@ -17,9 +17,9 @@ it('renders without crashing', () => {
   const div = document.createElement('div');
   ReactDOM.render(
     <Provider store={store}>
-      <App/>
+      <App />
     </Provider>,
-    div
+    div,
   );
 });
 

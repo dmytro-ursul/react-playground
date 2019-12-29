@@ -40,5 +40,6 @@ input {
 }
 
 .remove-item {
-  float: right
+  float: right;
+  cursor: pointer;
 }

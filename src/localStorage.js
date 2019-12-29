@@ -4,9 +4,9 @@ export const loadState = () => {
     return undefined;
   }
   return JSON.parse(serializedState);
-}
+};
 
 export const saveState = (state) => {
   const serializedState = JSON.stringify(state);
   localStorage.setItem('state', serializedState);
-}
+};

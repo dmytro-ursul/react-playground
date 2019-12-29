@@ -1,10 +1,10 @@
-import { combineReducers } from 'redux'
-import tasks from './tasks'
-import projects from './projects'
+import { combineReducers } from 'redux';
+import tasks from './tasks';
+import projects from './projects';
 
 const todoList = combineReducers({
   tasks,
-  projects
+  projects,
 });
 
-export default todoList
+export default todoList;
