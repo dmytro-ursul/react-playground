@@ -1,26 +1,32 @@
-import React, { Component } from 'react';
+import React from 'react';
 import { connect } from 'react-redux';
-import ProjectHeader from './ProjectHeader.js';
-import TaskForm from './TaskForm.js';
-import Task from './Task.js';
+import { PropTypes } from 'prop-types';
+import ProjectHeader from './ProjectHeader';
+import TaskForm from './TaskForm';
+import Task from './Task';
 
-class Project extends Component {
-  render() {
-    const { id, name, items } = this.props;
+function Project(props) {
+  const { id, name, items } = props;
 
-    return (
-      <div className="project">
-        <ProjectHeader name={name} id={id} />
-        <TaskForm projectId={id} />
-        <div className="task-list">
-          {items.map((task) => (
-            <Task name={task.name} id={task.id} key={task.id} />
-          ))}
-        </div>
+  return (
+    <div className="project">
+      <ProjectHeader name={name} id={id} />
+      <TaskForm projectId={id} />
+      <div className="task-list">
+        {items.map((task) => (
+          <Task name={task.name} id={task.id} key={task.id} />
+        ))}
       </div>
-    );
-  }
+    </div>
+  );
 }
+
+Project.propTypes = {
+  id: PropTypes.string.isRequired,
+  name: PropTypes.string.isRequired,
+  items: PropTypes.arrayOf(PropTypes.object).isRequired,
+};
+
 
 const mapStateToProps = (state, ownProps) => ({
   items: state.tasks.filter((task) => task.projectId === ownProps.id),

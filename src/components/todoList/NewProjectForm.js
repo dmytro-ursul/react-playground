@@ -1,5 +1,7 @@
+/* eslint-disable no-shadow */
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import { PropTypes } from 'prop-types';
 import { addProject } from './actions';
 
 class NewProjectForm extends Component {
@@ -16,23 +18,30 @@ class NewProjectForm extends Component {
 
   onSubmit = (event) => {
     event.preventDefault();
-    this.props.addProject(this.state.name);
+    const { addProject } = this.props;
+    const { name } = this.state;
+    addProject(name);
     this.setState({ name: '' });
   }
 
   render() {
+    const { name } = this.state;
     return (
       <form onSubmit={this.onSubmit} id="new-project-form">
         <input
           autoFocus
-          value={this.state.name}
+          value={name}
           onChange={this.onChange}
         />
-        <button>add project</button>
+        <button type="button">add project</button>
       </form>
     );
   }
 }
+
+NewProjectForm.propTypes = {
+  addProject: PropTypes.func.isRequired,
+};
 
 export default connect(
   null,

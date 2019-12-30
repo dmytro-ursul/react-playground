@@ -14,7 +14,7 @@ function TodoList(props) {
 }
 
 TodoList.propTypes = {
-  projects: PropTypes.arrayOf(PropTypes.instanceOf(Object)).isRequired,
+  projects: PropTypes.arrayOf(PropTypes.object).isRequired,
 };
 
 const mapStateToProps = (state) => ({

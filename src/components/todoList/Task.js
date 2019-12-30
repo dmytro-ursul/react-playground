@@ -58,7 +58,7 @@ class Task extends Component {
           aria-hidden
           onClick={() => removeTask(id)}
         >
-x
+        x
         </span>
       </div>
     );
