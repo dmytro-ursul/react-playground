@@ -33,7 +33,7 @@ class NewProjectForm extends Component {
           value={name}
           onChange={this.onChange}
         />
-        <button type="button">add project</button>
+        <input type="button" value="add project" onClick={this.onSubmit} />
       </form>
     );
   }

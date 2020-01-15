@@ -15,8 +15,12 @@
   background-color: #79bcd8;
 }
 
-ul.task-list{
+.task-list{
   padding: 5px;
+}
+
+.task-list div:hover{
+  background-color: #DDD;
 }
 
 form {
@@ -31,7 +35,7 @@ form {
   width: auto;
   height: 20px;
   display: inline-block;
-  margin-top: 3px;
+  margin: 3px;
   list-style-type: none;
 }
 

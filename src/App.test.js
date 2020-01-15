@@ -3,11 +3,12 @@ import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
 import { createStore } from 'redux';
 import { shallow } from 'enzyme';
+import renderer from 'react-test-renderer';
 import App from './App';
 import reducer from './components/todoList/reducers';
 
 const initialState = {
-  projects: [{ id: 12345, name: 'initial', items: [] }],
+  projects: [{ id: '12345', name: 'initial', items: [] }],
 };
 
 const store = createStore(reducer, initialState);
@@ -25,4 +26,13 @@ it('renders without crashing', () => {
 
 it('shallow renders without crashing', () => {
   shallow(<App />);
+});
+
+it('matches snapshot', () => {
+  const tree = renderer.create(
+    <Provider store={store}>
+      <App />
+    </Provider>,
+  ).toJSON();
+  expect(tree).toMatchSnapshot();
 });
