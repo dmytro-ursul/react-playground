@@ -1,0 +1,63 @@
+#project-list {
+  margin: 0 auto;
+  padding: 5px;
+  border: 1px solid 5571FF;
+  width: 300px;
+}
+
+.project{
+  padding: 5px;
+  background-color: #f6f9c6;
+  margin-bottom: 5px;
+}
+
+.project-header{
+  background-color: #79bcd8;
+}
+
+.task-list{
+  padding: 5px;
+}
+
+.task-list div:hover{
+  background-color: #DDD;
+}
+
+.project-name {
+  margin: 5px;
+}
+
+.task {
+  width: auto;
+  height: 20px;
+  display: inline-block;
+  margin: 3px;
+  list-style-type: none;
+}
+
+.flex {
+  display: flex;
+}
+
+.text-enter {
+  flex-grow: 2;
+}
+
+.task-add {
+  flex-grow: 1;
+}
+
+.project-header, .task-box {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+input {
+  margin: 5px
+}
+
+.remove-item {
+  float: right;
+  cursor: pointer;
+}

@@ -1,0 +1,68 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`matches snapshot 1`] = `
+<div
+  className="App"
+>
+  <form
+    id="new-project-form"
+    onSubmit={[Function]}
+  >
+    <input
+      autoFocus={true}
+      onChange={[Function]}
+      value=""
+    />
+    <input
+      onClick={[Function]}
+      type="button"
+      value="add project"
+    />
+  </form>
+  <div
+    id="project-list"
+  >
+    <div
+      className="project"
+    >
+      <div
+        className="project-header"
+      >
+        <p
+          className="project-name"
+          onClick={[Function]}
+        >
+          initial
+          <span
+            aria-hidden={true}
+            className="remove-item"
+            onClick={[Function]}
+            role="button"
+          >
+            x
+          </span>
+        </p>
+      </div>
+      <form
+        className="task-form"
+        onSubmit={[Function]}
+      >
+        <input
+          onChange={[Function]}
+          placeholder="Please enter task name"
+          type="text"
+          value=""
+        />
+        <input
+          onClick={[Function]}
+          type="button"
+          value="add task"
+        />
+      </form>
+      <div
+        className="task-list"
+      />
+    </div>
+  </div>
+</div>
+`;
