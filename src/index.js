@@ -9,6 +9,7 @@ import { loadState, saveState } from './localStorage';
 import { createStore } from 'redux';
 import { Provider } from 'react-redux';
 import reducer from './components/todoList/reducers';
+import { BrowserRouter } from 'react-router-dom';
 
 const persistedState = loadState();
 
@@ -23,7 +24,9 @@ const root = ReactDOM.createRoot(container);
 root.render(
   <React.StrictMode>
     <Provider store={store}>
-      <App />
+      <BrowserRouter>
+        <App/>
+      </BrowserRouter>
     </Provider>
   </React.StrictMode>
 );
