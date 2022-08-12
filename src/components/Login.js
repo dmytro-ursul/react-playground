@@ -5,6 +5,8 @@ class Login extends React.Component {
     e.preventDefault();
     const form = e.target;
     const data = new FormData(form);
+    if (!this.validateFormData(data))
+      return;
     const xhr = new XMLHttpRequest();
     xhr.open(form.method, form.action);
     xhr.setRequestHeader("Accept", "application/json");
@@ -17,6 +19,14 @@ class Login extends React.Component {
       }
     };
     xhr.send(data);
+  }
+
+  validateFormData = (data) => {
+    if (data.get("username").length === 0 || data.get("password").length === 0) {
+      return false;
+    } else {
+      return true;
+    }
   }
 
   render() {
