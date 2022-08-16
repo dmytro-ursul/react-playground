@@ -1,8 +1,13 @@
 import React from 'react';
+import { setToken } from "./todoList/actions";
+import { connect } from 'react-redux';
+import { Navigate } from "react-router-dom";
 
 class Login extends React.Component {
   handleSubmit = (e) => {
     e.preventDefault();
+
+    const { setToken } = this.props;
     const form = e.target;
     const data = new FormData(form);
     if (!this.validateFormData(data))
@@ -12,8 +17,9 @@ class Login extends React.Component {
     xhr.setRequestHeader("Accept", "application/json");
     xhr.onreadystatechange = () => {
       if (xhr.readyState !== XMLHttpRequest.DONE) return;
-      if (xhr.status === 200) {
-        window.location.href = "/";
+      if (xhr.responseText.length > 0) {
+        const response = JSON.parse(xhr.responseText);
+        setToken(response.token);
       } else {
         alert("Login failed");
       }
@@ -30,8 +36,10 @@ class Login extends React.Component {
   }
 
   render() {
+    const { token } = this.props;
     return (
       <div>
+        { token ? <Navigate to="/" /> : null }
         <form action="http://localhost:3051/sessions" method="post" onSubmit={this.handleSubmit}>
           <div className="form-group">
             <input type="text" name="username" placeholder="username"/>
@@ -46,4 +54,11 @@ class Login extends React.Component {
   }
 };
 
-export default Login
+const mapStateToProps = (state) => ({
+  token: state.token,
+});
+
+export default connect(
+  mapStateToProps,
+  { setToken }
+)(Login);
