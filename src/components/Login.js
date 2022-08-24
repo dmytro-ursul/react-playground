@@ -10,8 +10,13 @@ class Login extends React.Component {
     const { setToken } = this.props;
     const form = e.target;
     const data = new FormData(form);
-    if (!this.validateFormData(data))
+    if (form.checkValidity() === false) {
+      e.preventDefault();
+      e.stopPropagation();
+      form.classList.add('was-validated');
       return;
+    }
+    form.classList.add('was-validated');
     const xhr = new XMLHttpRequest();
     xhr.open(form.method, form.action);
     xhr.setRequestHeader("Accept", "application/json");
@@ -27,25 +32,19 @@ class Login extends React.Component {
     xhr.send(data);
   }
 
-  validateFormData = (data) => {
-    if (data.get("username").length === 0 || data.get("password").length === 0) {
-      return false;
-    } else {
-      return true;
-    }
-  }
-
   render() {
     const { token } = this.props;
     return (
       <div>
         { token ? <Navigate to="/" /> : null }
-        <form action="http://localhost:3051/sessions" method="post" onSubmit={this.handleSubmit}>
-          <div className="form-group">
-            <input type="text" name="username" placeholder="username"/>
+        <form className="needs-validation" action="http://localhost:3051/sessions" method="post" onSubmit={this.handleSubmit} noValidate>
+          <input className="form-control" type="text" name="username" placeholder="username" required/>
+          <div className="invalid-feedback">
+            Please provide a username.
           </div>
-          <div className="form-group">
-            <input type="password" name="password" placeholder="password"/>
+          <input className="form-control" type="password" name="password" placeholder="password" required/>
+          <div className="invalid-feedback">
+            Please provide a password.
           </div>
           <input className="btn btn-primary" type="submit" value="login"/>
         </form>

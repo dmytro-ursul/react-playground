@@ -17,7 +17,7 @@ function TodoList(props) {
   return(
     <div>
       { token ? null : <Navigate to="/login" /> }
-      <button className="btn btn-primary" onClick={() => { removeToken() }}>Logout</button>
+      <button className="btn btn-primary logout" onClick={() => { removeToken() }}>Logout</button>
       <NewProjectForm/>
       <div id="project-list">{projectList}</div>
     </div>

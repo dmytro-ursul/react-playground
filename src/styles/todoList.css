@@ -61,3 +61,8 @@ input {
   float: right;
   cursor: pointer;
 }
+
+.btn.logout {
+  position: relative;
+  float: right;
+}
