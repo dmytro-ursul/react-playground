@@ -6,9 +6,6 @@ import NewProjectForm from "./NewProjectForm";
 import { Navigate } from "react-router-dom";
 import { removeToken } from "./actions";
 
-// import { dispatch } from 'redux'
-// import * as TodoActionCreators from './actions'
-
 function TodoList(props) {
   const { projects, token, removeToken } = props;
   const projectList = projects.map((project) => (
