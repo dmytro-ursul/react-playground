@@ -6,14 +6,16 @@ import './styles/todoList.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 import { loadState, saveState } from './localStorage';
-import { createStore } from 'redux';
+import { configureStore } from '@reduxjs/toolkit';
 import { Provider } from 'react-redux';
 import reducer from './components/todoList/reducers';
 import { BrowserRouter } from 'react-router-dom';
 
-const persistedState = loadState();
+const preloadedState = loadState();
 
-const store = createStore(reducer, persistedState);
+const store = configureStore({
+  reducer, preloadedState
+});
 
 store.subscribe(() => {
   saveState(store.getState());
