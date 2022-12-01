@@ -11,7 +11,7 @@ gem 'graphql'
 gem 'graphiql-rails'
 gem 'jwt'
 gem 'pg', '~> 1.4'
-gem 'puma', '~> 5.6'
+gem 'puma', '~> 6.0'
 gem 'rack-cors'
 gem 'rails'
 
