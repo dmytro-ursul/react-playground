@@ -10,6 +10,8 @@ import { configureStore } from '@reduxjs/toolkit';
 import { Provider } from 'react-redux';
 import reducer from './components/todoList/reducers';
 import { BrowserRouter } from 'react-router-dom';
+import client from './client';
+import { ApolloProvider } from "@apollo/client";
 
 const preloadedState = loadState();
 
@@ -25,11 +27,13 @@ const container = document.getElementById('root');
 const root = ReactDOM.createRoot(container);
 root.render(
   <React.StrictMode>
-    <Provider store={store}>
-      <BrowserRouter>
-        <App/>
-      </BrowserRouter>
-    </Provider>
+    <ApolloProvider client={client}>
+      <Provider store={store}>
+        <BrowserRouter>
+          <App/>
+        </BrowserRouter>
+      </Provider>
+    </ApolloProvider>
   </React.StrictMode>
 );
 

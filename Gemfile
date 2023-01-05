@@ -5,6 +5,7 @@ git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
 ruby '3.1.2'
 
+gem 'annotate'
 gem 'bcrypt', '~> 3.1.7'
 gem 'bootsnap', require: false
 gem 'graphql'
@@ -14,6 +15,9 @@ gem 'pg', '~> 1.4'
 gem 'puma', '~> 5.6'
 gem 'rack-cors'
 gem 'rails'
+gem 'pry-rails'
+gem 'pry-nav'
+gem 'pry-stack_explorer'
 
 # Build JSON APIs with ease [https://github.com/rails/jbuilder]
 # gem "jbuilder"

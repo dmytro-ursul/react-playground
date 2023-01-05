@@ -6,11 +6,6 @@ module Types
 
     # Add root-level fields here.
     # They will be entry points for queries on your schema.
-
-    # TODO: remove me
-    field :projects, [Project], null: false
-    def projects
-      Project.all
-    end
+    field :projects, [ProjectType], 'Returns all projects', null: false
   end
 end
