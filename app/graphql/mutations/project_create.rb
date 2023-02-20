@@ -6,15 +6,13 @@ module Mutations
 
     field :project, Types::ProjectType, null: false
 
-    # argument :project_input, Types::ProjectInputType, required: true
-    argument :name, String, required: true
+    argument :project_input, Types::ProjectInputType, required: true
 
     def resolve(project_input:)
       project = ::Project.new(**project_input)
       raise GraphQL::ExecutionError.new "Error creating project", extensions: project.errors.to_hash unless project.save
 
 
-      require 'pry'; binding.pry
       { project: project }
     end
   end

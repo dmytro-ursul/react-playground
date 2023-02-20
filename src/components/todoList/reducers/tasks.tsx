@@ -1,4 +1,11 @@
-const tasks = (state = [], action) => {
+interface Task {
+  id: number;
+  name: string;
+  completed: boolean;
+  projectId: number;
+}
+
+const tasks = (state: Task[] = [], action: { type: string; id: number; name: string; completed: boolean; projectId: number; }): Task[] => {
   switch (action.type) {
     case 'ADD_TASK':
       return [
