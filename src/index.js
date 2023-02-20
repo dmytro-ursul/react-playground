@@ -5,35 +5,23 @@ import './styles/index.css';
 import './styles/todoList.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
-import { loadState, saveState } from './localStorage';
-import { configureStore } from '@reduxjs/toolkit';
 import { Provider } from 'react-redux';
-import reducer from './components/todoList/reducers';
 import { BrowserRouter } from 'react-router-dom';
-import client from './client';
-import { ApolloProvider } from "@apollo/client";
-
-const preloadedState = loadState();
-
-const store = configureStore({
-  reducer, preloadedState
-});
-
-store.subscribe(() => {
-  saveState(store.getState());
-});
+import { apiSlice } from './components/todoList/services/apiSlice';
+import store from './store';
+import { ApiProvider } from '@reduxjs/toolkit/query/react';
 
 const container = document.getElementById('root');
 const root = ReactDOM.createRoot(container);
 root.render(
   <React.StrictMode>
-    <ApolloProvider client={client}>
+    <ApiProvider api={apiSlice}>
       <Provider store={store}>
         <BrowserRouter>
           <App/>
         </BrowserRouter>
       </Provider>
-    </ApolloProvider>
+    </ApiProvider>
   </React.StrictMode>
 );
 

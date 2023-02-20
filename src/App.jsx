@@ -1,5 +1,5 @@
-import TodoList from './components/todoList/TodoList';
-import Login from './components/Login';
+import TodoList from 'components/todoList/TodoList';
+import Login from 'components/Login';
 
 import {
   Routes,
