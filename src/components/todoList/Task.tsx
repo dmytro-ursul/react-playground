@@ -1,64 +1,65 @@
 import React, { useState } from 'react';
 import { connect } from 'react-redux';
-import { removeTask, updateTask } from './features/tasksSlice';
+import {
+  useUpdateTaskMutation,
+  useRemoveTaskMutation,
+} from './services/apiSlice';
 
 type Props = {
   id: number,
   name: string,
+  projectId: number,
+  completed: boolean
 };
 
-const Task = ({ id, name }: Props) => {
+const Task = ({ id, name, projectId, completed }: Props) => {
   const [isEditing, setIsEditing] = useState(false);
-  const [taskName, setTaskName] = useState(name);
-  const [oldName, setOldName] = useState('');
+  const [updateTask] = useUpdateTaskMutation();
+  const [removeTask] = useRemoveTaskMutation();
 
-  const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setTaskName(event.target.value);
-  };
-
-  const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmit = (event: React.KeyboardEvent<HTMLInputElement>) => {
     event.preventDefault();
-    updateTask({id, name: taskName});
+    const newName = (event.target as HTMLInputElement).value;
+    updateTask({id: +id, name: newName, projectId: +projectId, completed: false});
     setIsEditing(false);
   };
 
   const editTask = () => {
-    setOldName(taskName);
     setIsEditing(true);
   };
 
   const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
     if (e.key === 'Escape') {
-      setTaskName(oldName);
       setIsEditing(false);
+    } else if (e.key === 'Enter') {
+      handleSubmit(e);
     }
   };
 
   return (
     <div className="task-box">
       {isEditing ? (
-        <form onSubmit={handleSubmit}>
+        <form>
           <input
             className="editTask"
             autoFocus
-            value={taskName}
+            defaultValue={name}
             onKeyDown={handleKeyDown}
-            onChange={handleChange}
           />
         </form>
       ) : (
         <p className="task" onClick={editTask}>
-          {taskName}
+          {name}
         </p>
       )}
       <button
         className="btn-close"
         type="button"
         aria-label="Delete task"
-        onClick={() => removeTask({id})}
+        onClick={() => removeTask(+id)}
       />
     </div>
   );
 };
 
-export default connect(null, { removeTask, updateTask })(Task);
+export default Task;

@@ -1,18 +1,15 @@
 import React, { useState } from 'react';
 import { connect } from 'react-redux';
-import { addTask } from './features/tasksSlice';
+import { useCreateTaskMutation} from "./services/apiSlice";
 
-interface TaskFormProps {
-  projectId: number;
-}
-
-function TaskForm ({ projectId }: TaskFormProps) {
+const TaskForm = ({ projectId }: { projectId: number }) => {
   const [name, setName] = useState('');
+  const [createTask] = useCreateTaskMutation();
 
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     const id = Math.floor(Math.random() * 1000000);
-    addTask({id, name, projectId, completed: false});
+    createTask({ name, projectId: +projectId });
     setName('');
   };
 
@@ -36,7 +33,4 @@ function TaskForm ({ projectId }: TaskFormProps) {
   );
 };
 
-export default connect(
-  null,
-  { addTask },
-)(TaskForm);
+export default TaskForm;

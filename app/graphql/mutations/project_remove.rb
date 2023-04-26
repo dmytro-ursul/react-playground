@@ -4,7 +4,7 @@ module Mutations
 
     field :project, Types::ProjectType, null: true
 
-    argument :id, ID, required: true
+    argument :id, Integer, required: true
 
     def resolve(id:)
       project = ::Project.find(id)

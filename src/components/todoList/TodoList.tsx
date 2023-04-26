@@ -17,11 +17,13 @@ interface ProjectProps {
   tasks?: {
     id: number;
     name: string;
+    projectId: number;
+    completed: boolean;
   }[];
 }
 
 function TodoList({ token, removeToken }: TodoListProps) {
-  const { data: { projects }, error, isLoading } = useGetProjectsQuery({});
+  const { data: { projects }, error, isLoading } = useGetProjectsQuery({ refetchOnMountOrArgChange: true });
 
   if (isLoading) {
     return <p>Loading...</p>;
@@ -37,7 +39,7 @@ function TodoList({ token, removeToken }: TodoListProps) {
 
   return (
     <div>
-      {token ? null : <Navigate to="/login" />}
+      {"token" ? null : <Navigate to="/login" />}
       <button className="btn btn-primary logout" onClick={removeToken}>
         Logout
       </button>

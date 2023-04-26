@@ -6,10 +6,11 @@ module Mutations
 
     field :task, Types::TaskType, null: false
 
-    argument :task_input, Types::TaskInputType, required: true
+    argument :name, String, required: true
+    argument :project_id, Integer, required: true
 
-    def resolve(task_input:)
-      task = ::Task.new(**task_input)
+    def resolve(name:, project_id:)
+      task = ::Task.new(name: name, project_id: project_id)
       raise GraphQL::ExecutionError.new "Error creating task", extensions: task.errors.to_hash unless task.save
 
       { task: task }

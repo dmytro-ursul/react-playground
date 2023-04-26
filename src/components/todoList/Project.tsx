@@ -10,6 +10,8 @@ interface ProjectProps {
   tasks?: {
     id: number;
     name: string;
+    projectId: number;
+    completed: boolean;
   }[];
 }
 
@@ -20,7 +22,7 @@ export default function Project({ id, name, tasks = [] }: ProjectProps): JSX.Ele
       <TaskForm projectId={id} />
       <div className="task-list">
         {tasks.map((task) => (
-          <Task name={task.name} id={task.id} key={task.id} />
+          <Task id={task.id} key={task.id} name={task.name} completed={task.completed} projectId={id} />
         ))}
       </div>
     </div>

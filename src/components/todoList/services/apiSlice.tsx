@@ -1,5 +1,13 @@
 import { createApi } from '@reduxjs/toolkit/query/react';
-import { GET_PROJECTS, CREATE_PROJECT, REMOVE_PROJECT, CREATE_TASK } from '../queries/projects';
+import {
+  GET_PROJECTS,
+  CREATE_PROJECT,
+  UPDATE_PROJECT,
+  REMOVE_PROJECT,
+  CREATE_TASK,
+  UPDATE_TASK,
+  REMOVE_TASK
+} from '../queries/projects';
 import { graphqlRequestBaseQuery } from '@rtk-query/graphql-request-base-query';
 const BASE_URL = 'http://localhost:3051/graphql';
 
@@ -49,11 +57,19 @@ export const apiSlice = createApi({
       }),
       invalidatesTags: ['Project'],
     }),
+    updateProject: builder.mutation({
+      query: ({ id, name }: { id: number; name: string }) => ({
+        document: UPDATE_PROJECT,
+        variables: { id, name },
+      }),
+      invalidatesTags: ['Project'],
+    }),
     removeProject: builder.mutation({
       query: (id: number) => ({
-        document: CREATE_PROJECT,
+        document: REMOVE_PROJECT,
         variables: {id},
       }),
+      invalidatesTags: ['Project'],
     }),
     createTask: builder.mutation({
       query: ({ name, projectId }: { name: string; projectId: number }) => ({
@@ -61,8 +77,30 @@ export const apiSlice = createApi({
         variables: { name, projectId },
       }),
       invalidatesTags: ['Project'],
-    })
+    }),
+    updateTask: builder.mutation({
+      query: ({id, name, projectId, completed}: {id: number; name: string; projectId: number, completed: boolean}) => ({
+        document: UPDATE_TASK,
+        variables: {id, name, projectId, completed},
+      }),
+      invalidatesTags: ['Project'],
+    }),
+    removeTask: builder.mutation({
+      query: (id: number) => ({
+        document: REMOVE_TASK,
+        variables: {id},
+      }),
+      invalidatesTags: ['Project'],
+    }),
   }),
 });
 
-export const { useGetProjectsQuery, useCreateProjectMutation } = apiSlice;
+export const {
+  useGetProjectsQuery,
+  useRemoveProjectMutation,
+  useCreateProjectMutation,
+  useUpdateProjectMutation,
+  useCreateTaskMutation,
+  useUpdateTaskMutation,
+  useRemoveTaskMutation,
+} = apiSlice;

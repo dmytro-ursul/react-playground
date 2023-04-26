@@ -1,13 +1,15 @@
 import { loadState, saveState } from "./localStorage";
 import { configureStore } from "@reduxjs/toolkit";
-import reducer from "components/todoList/features";
+// import reducer from "components/todoList/features";
 import {apiSlice} from "./components/todoList/services/apiSlice";
 
 const preloadedState = loadState();
 
 const store = configureStore({
   preloadedState,
-  reducer,
+  reducer: {
+    [apiSlice.reducerPath]: apiSlice.reducer,
+  },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware().concat(apiSlice.middleware),
 });

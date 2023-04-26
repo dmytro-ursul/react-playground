@@ -1,7 +1,7 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
 interface Project {
-  id: number;
+  id?: number;
   name: string;
 }
 
@@ -9,11 +9,14 @@ const projectsSlice = createSlice({
   name: 'projects',
   initialState: [] as Project[],
   reducers: {
-    addProject: (state, action: PayloadAction<Project>) => {
+    addProject: (state, action: PayloadAction<{ name: string }>) => {
       state.push(action.payload);
     },
     removeProject: (state, action: PayloadAction<{ id: number }>) => {
-      return state.filter((project) => project.id !== action.payload.id);
+      const index = state.findIndex((project) => project.id === action.payload.id);
+      if (index !== -1) {
+        state.splice(index, 1);
+      }
     },
     updateProject: (state, action: PayloadAction<Project>) => {
       const index = state.findIndex((project) => project.id === action.payload.id);
