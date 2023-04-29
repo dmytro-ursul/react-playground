@@ -8,7 +8,7 @@ import reportWebVitals from './reportWebVitals';
 import { Provider } from 'react-redux';
 import { BrowserRouter } from 'react-router-dom';
 import { apiSlice } from './components/todoList/services/apiSlice';
-import store from './store';
+import {store} from './store';
 import { ApiProvider } from '@reduxjs/toolkit/query/react';
 
 const container = document.getElementById('root');

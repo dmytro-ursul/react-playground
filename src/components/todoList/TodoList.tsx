@@ -4,6 +4,9 @@ import { useState } from 'react';
 import Project from './Project';
 import NewProjectForm from './NewProjectForm';
 import { Navigate } from 'react-router-dom';
+import {useDispatch, useSelector} from "react-redux";
+import {setToken} from "./features/authSlice";
+import {RootState} from "../../store";
 
 interface ProjectProps {
   id: number;
@@ -17,12 +20,16 @@ interface ProjectProps {
 }
 
 const TodoList = () => {
-  const { data: { projects }, error, isLoading } = useGetProjectsQuery({ refetchOnMountOrArgChange: true });
-  const [token, setToken] = useState(localStorage.getItem('token') || null);
+  const token = useSelector((state: RootState) => state.auth.token);
+  const dispatch = useDispatch();
+  const {
+    data: { projects } = { projects: [] },
+    error,
+    isLoading,
+  } = useGetProjectsQuery({ refetchOnMountOrArgChange: true }, { skip: !token });
 
   const removeToken = () => {
-    localStorage.removeItem('token');
-    setToken(null);
+    dispatch(setToken(null));
   }
 
   if (isLoading) {

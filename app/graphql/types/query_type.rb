@@ -13,7 +13,11 @@ module Types
     end
 
     def projects
-      context[:current_user].projects
+      if context[:current_user].present?
+        context[:current_user].projects
+      else
+        []
+      end
     end
 
     def project(id:)

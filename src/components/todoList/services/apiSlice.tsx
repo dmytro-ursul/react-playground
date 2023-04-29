@@ -10,6 +10,7 @@ import {
 } from '../queries/projects';
 import { SIGN_IN } from '../queries/auth';
 import { graphqlRequestBaseQuery } from '@rtk-query/graphql-request-base-query';
+import type { RootState } from '../../../store';
 const BASE_URL = 'http://localhost:3051/graphql';
 
 interface Task {
@@ -37,11 +38,14 @@ export const apiSlice = createApi({
   reducerPath: 'api',
   baseQuery: graphqlRequestBaseQuery({
     url: BASE_URL,
-    prepareHeaders: (headers) => {
-      const token = localStorage.getItem('token');
+    prepareHeaders: (headers, { getState }) => {
+      const token = (getState() as RootState).auth.token;
+
+      // If we have a token set in state, let's assume that we should be passing it.
       if (token) {
-        headers.set('Authorization', `Bearer ${token}`);
+        headers.set('authorization', `Bearer ${token}`);
       }
+
       return headers;
     },
   }),
@@ -51,7 +55,8 @@ export const apiSlice = createApi({
       query: ({ username, password }: { username: string; password: string }) => ({
         document: SIGN_IN,
         variables: { username, password },
-      })
+      }),
+      invalidatesTags: ['Project']
     }),
     getProjects: builder.query({
       query: () => ({

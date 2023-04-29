@@ -1,17 +1,6 @@
 import React, { useState } from 'react';
 import { useCreateProjectMutation } from './services/apiSlice';
 
-interface CreateProjectResponse {
-  data: {
-    createProject: {
-      project: {
-        id: number;
-        name: string;
-      }
-    }
-  }
-}
-
 const NewProjectForm = () => {
   const [name, setName] = useState('');
   const [createProject] = useCreateProjectMutation();
