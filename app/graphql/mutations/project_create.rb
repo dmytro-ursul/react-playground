@@ -8,8 +8,8 @@ module Mutations
 
     argument :name, String, required: true
 
-    def resolve(name)
-      project = ::Project.new(name)
+    def resolve(name:)
+      project = ::Project.new(name: name, user_id: context[:current_user].id)
       raise GraphQL::ExecutionError.new "Error creating project", extensions: project.errors.to_hash unless project.save
 
 

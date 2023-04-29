@@ -8,6 +8,7 @@ import {
   UPDATE_TASK,
   REMOVE_TASK
 } from '../queries/projects';
+import { SIGN_IN } from '../queries/auth';
 import { graphqlRequestBaseQuery } from '@rtk-query/graphql-request-base-query';
 const BASE_URL = 'http://localhost:3051/graphql';
 
@@ -23,27 +24,35 @@ interface Project {
   tasks: Task[];
 }
 
-interface ProjectsResponse {
-  data: {
-    projects: Project[];
-  }
-}
-
-interface ProjectResponse {
-  data: {
-    createProject: {
-      project: Project;
-    }
-  }
+interface SignInResponse {
+  signIn: {
+    token: string;
+    user: {
+      id: number;
+    };
+  };
 }
 
 export const apiSlice = createApi({
   reducerPath: 'api',
   baseQuery: graphqlRequestBaseQuery({
     url: BASE_URL,
+    prepareHeaders: (headers) => {
+      const token = localStorage.getItem('token');
+      if (token) {
+        headers.set('Authorization', `Bearer ${token}`);
+      }
+      return headers;
+    },
   }),
   tagTypes: ['Project'],
   endpoints: (builder) => ({
+    login: builder.mutation<SignInResponse, { username: string; password: string }>({
+      query: ({ username, password }: { username: string; password: string }) => ({
+        document: SIGN_IN,
+        variables: { username, password },
+      })
+    }),
     getProjects: builder.query({
       query: () => ({
         document: GET_PROJECTS,
@@ -96,6 +105,7 @@ export const apiSlice = createApi({
 });
 
 export const {
+  useLoginMutation,
   useGetProjectsQuery,
   useRemoveProjectMutation,
   useCreateProjectMutation,

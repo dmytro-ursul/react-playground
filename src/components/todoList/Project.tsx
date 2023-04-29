@@ -1,5 +1,4 @@
 import React from 'react';
-import { connect } from 'react-redux';
 import ProjectHeader from './ProjectHeader';
 import TaskForm from './TaskForm';
 import Task from './Task';

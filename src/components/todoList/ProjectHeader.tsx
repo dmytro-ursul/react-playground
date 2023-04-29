@@ -1,8 +1,5 @@
 import React, { useState } from 'react';
-import { useDispatch } from 'react-redux';
-import { connect } from 'react-redux';
 import { useRemoveProjectMutation, useUpdateProjectMutation } from "./services/apiSlice";
-// import { removeProject, updateProject } from './features/projectsSlice';
 
 type Props = {
   id: number,

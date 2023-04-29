@@ -13,11 +13,11 @@ module Types
     end
 
     def projects
-      Project.all
+      context[:current_user].projects
     end
 
     def project(id:)
-      Project.find(id)
+      context[:current_user].projects.find(id)
     end
   end
 end

@@ -8,6 +8,8 @@ ruby '3.1.2'
 gem 'annotate'
 gem 'bcrypt', '~> 3.1.7'
 gem 'bootsnap', require: false
+gem 'devise'
+gem 'devise-jwt'
 gem 'graphql'
 gem 'graphiql-rails'
 gem 'jwt'

@@ -1,6 +1,4 @@
 import React, { useState } from 'react';
-import { useDispatch } from 'react-redux';
-import { addProject } from './features/projectsSlice'
 import { useCreateProjectMutation } from './services/apiSlice';
 
 interface CreateProjectResponse {

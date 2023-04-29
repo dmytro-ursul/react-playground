@@ -1,34 +1,22 @@
 import React from 'react';
-import { setToken } from "./todoList/features/tokenSlice";
-import { connect, ConnectedProps } from 'react-redux';
+import { useState } from 'react';
 import { Navigate } from "react-router-dom";
+import { useLoginMutation } from "./todoList/services/apiSlice";
 
-interface Props extends PropsFromRedux {}
+const Login: React.FC = () => {
+  const [username, setUserName] = useState('');
+  const [password, setPassword] = useState('');
+  const [login, { isLoading, error }] = useLoginMutation();
+  const [token, setToken] = useState(localStorage.getItem('token'));
 
-const Login: React.FC<Props> = ({ token, setToken }) => {
-  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>): Promise<void> => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-
-    const form = e.currentTarget;
-
     try {
-      const response = await fetch(form.action, {
-        method: form.method,
-        headers: { "Accept": "application/json" },
-        body: new FormData(form),
-      });
-
-      if (response.ok) {
-        const data = await response.json();
-        setToken(data.token);
-      } else {
-        alert("Login failed");
-      }
-    } catch (error) {
-      console.error(error);
-      alert("An error occurred while logging in");
-    } finally {
-      form.classList.add('was-validated');
+      const { signIn: { token } } = await login({ username, password }).unwrap();
+      localStorage.setItem('token', token);
+      setToken(token);
+    } catch (err) {
+      console.error('Login failed:', err);
     }
   };
 
@@ -36,11 +24,27 @@ const Login: React.FC<Props> = ({ token, setToken }) => {
     <div>
       { token ? <Navigate to="/" /> : null }
       <form className="needs-validation" action="http://localhost:3051/sessions" method="post" onSubmit={handleSubmit} noValidate>
-        <input className="form-control" type="text" name="username" placeholder="username" required/>
+        <input
+          className="form-control"
+          type="text"
+          name="username"
+          placeholder="username"
+          value={username}
+          onChange={(e) => setUserName(e.target.value)}
+          required
+        />
         <div className="invalid-feedback">
           Please provide a username.
         </div>
-        <input className="form-control" type="password" name="password" placeholder="password" required/>
+        <input
+          className="form-control"
+          type="password"
+          name="password"
+          value={password}
+          onChange={(e) => setPassword(e.target.value)}
+          placeholder="password"
+          required
+        />
         <div className="invalid-feedback">
           Please provide a password.
         </div>
@@ -50,10 +54,4 @@ const Login: React.FC<Props> = ({ token, setToken }) => {
   );
 }
 
-const mapStateToProps = (state: { token: any }) => ({
-  token: state.token,
-});
-
-const connector = connect(mapStateToProps, { setToken });
-type PropsFromRedux = ConnectedProps<typeof connector>;
-export default connector(Login);
+export default Login;
