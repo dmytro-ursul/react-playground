@@ -4,6 +4,8 @@
 #
 #  id              :bigint           not null, primary key
 #  email           :string
+#  first_name      :string           default(""), not null
+#  last_name       :string           default(""), not null
 #  name            :string
 #  password_digest :string
 #  username        :string

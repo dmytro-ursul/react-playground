@@ -62,7 +62,16 @@ input {
   cursor: pointer;
 }
 
+/* MARGINS */
+
+.m-r-30 {
+  margin-right: 30px;
+}
+
+.right {
+  float: right;
+}
+
 .btn.logout {
   position: relative;
-  float: right;
 }

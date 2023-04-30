@@ -1,7 +1,7 @@
 import React from 'react';
 import { useState, useRef, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { setToken } from './todoList/features/authSlice';
+import { setToken, setUser } from './todoList/features/authSlice';
 import { Navigate } from "react-router-dom";
 import { useLoginMutation } from "./todoList/services/apiSlice";
 import { RootState } from '../store';
@@ -9,7 +9,7 @@ import { RootState } from '../store';
 const Login: React.FC = () => {
   const [username, setUserName] = useState('');
   const [password, setPassword] = useState('');
-  const [login, { isLoading, error }] = useLoginMutation();
+  const [login] = useLoginMutation();
   const token = useSelector((state: RootState) => state.auth.token);
   const dispatch = useDispatch();
   const submitButtonRef = useRef<HTMLInputElement>(null);
@@ -24,8 +24,9 @@ const Login: React.FC = () => {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     try {
-      const { signIn: { token } } = await login({ username, password }).unwrap();
+      const { signIn: { token, user} } = await login({ username, password }).unwrap();
       dispatch(setToken(token));
+      dispatch(setUser(user));
     } catch (err) {
       console.error('Login failed:', err);
     }

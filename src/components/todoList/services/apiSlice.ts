@@ -13,23 +13,12 @@ import { graphqlRequestBaseQuery } from '@rtk-query/graphql-request-base-query';
 import type { RootState } from '../../../store';
 const BASE_URL = 'http://localhost:3051/graphql';
 
-interface Task {
-  id: number;
-  name: string;
-  completed: boolean;
-}
-
-interface Project {
-  id: number;
-  name: string;
-  tasks: Task[];
-}
-
 interface SignInResponse {
   signIn: {
     token: string;
     user: {
-      id: number;
+      firstName: string;
+      lastName: string;
     };
   };
 }

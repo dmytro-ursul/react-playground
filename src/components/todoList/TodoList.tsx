@@ -21,12 +21,13 @@ interface ProjectProps {
 
 const TodoList = () => {
   const token = useSelector((state: RootState) => state.auth.token);
+  const user = useSelector((state: RootState) => state.auth.user);
   const dispatch = useDispatch();
   const {
     data: { projects } = { projects: [] },
     error,
     isLoading,
-  } = useGetProjectsQuery({ refetchOnMountOrArgChange: true }, { skip: !token });
+  } = useGetProjectsQuery({ skip: !token });
 
   const removeToken = () => {
     dispatch(setToken(null));
@@ -47,9 +48,11 @@ const TodoList = () => {
   return (
     <div>
       { token ? null : <Navigate to="/login" />}
-      <button className="btn btn-primary logout" onClick={() => removeToken()}>
+      {/*display user fullname*/}
+      <button className="btn btn-primary logout right" onClick={() => removeToken()}>
         Logout
       </button>
+      <span className="right m-r-30">{user.firstName} {user.lastName}</span>
       <NewProjectForm />
       <div id="project-list">{projectList}</div>
     </div>
