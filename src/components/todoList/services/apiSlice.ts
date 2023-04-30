@@ -11,7 +11,7 @@ import {
 import { SIGN_IN } from '../queries/auth';
 import { graphqlRequestBaseQuery } from '@rtk-query/graphql-request-base-query';
 import type { RootState } from '../../../store';
-const BASE_URL = 'http://localhost:3051/graphql';
+import AppSettings from '../../../settings';
 
 interface SignInResponse {
   signIn: {
@@ -26,11 +26,10 @@ interface SignInResponse {
 export const apiSlice = createApi({
   reducerPath: 'api',
   baseQuery: graphqlRequestBaseQuery({
-    url: BASE_URL,
+    url: AppSettings.apiUrl ?? "http://localhost:3051/graphql",
     prepareHeaders: (headers, { getState }) => {
       const token = (getState() as RootState).auth.token;
 
-      // If we have a token set in state, let's assume that we should be passing it.
       if (token) {
         headers.set('authorization', `Bearer ${token}`);
       }

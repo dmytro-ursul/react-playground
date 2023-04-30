@@ -10,7 +10,10 @@ module Mutations
     def resolve(id:, name:)
       project = ::Project.find(id)
 
-      raise GraphQL::ExecutionError.new "Error updating project", extensions: project.errors.to_hash unless project.update(name: name)
+      unless project.update(name: name)
+        raise GraphQL::ExecutionError.new 'Error updating project',
+                                          extensions: project.errors.to_hash
+      end
 
       { project: project }
     end

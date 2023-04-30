@@ -7,7 +7,6 @@ const TaskForm = ({ projectId }: { projectId: number }) => {
 
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    const id = Math.floor(Math.random() * 1000000);
     createTask({ name, projectId: +projectId });
     setName('');
   };
