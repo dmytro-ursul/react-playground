@@ -2,7 +2,7 @@
 
 module Types
   class ProjectType < Types::BaseObject
-    description "A project"
+    description 'A project'
 
     field :id, Integer, null: false
     field :name, String, null: false

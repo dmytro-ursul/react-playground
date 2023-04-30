@@ -2,7 +2,7 @@
 
 module Mutations
   class TaskUpdate < BaseMutation
-    description "Updates a task"
+    description 'Updates a task'
 
     field :task, Types::TaskType, null: false
 
@@ -10,7 +10,9 @@ module Mutations
 
     def resolve(task_input:)
       task = ::Task.find(task_input[:id])
-      raise GraphQL::ExecutionError.new "Error updating task", extensions: task.errors.to_hash unless task.update(task_input.to_h)
+      unless task.update(task_input.to_h)
+        raise GraphQL::ExecutionError.new 'Error updating task', extensions: task.errors.to_hash
+      end
 
       { task: task }
     end

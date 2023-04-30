@@ -27,3 +27,4 @@ yarn-error.log*
 /config/master.key
 tmp/
 log/
+.vscode

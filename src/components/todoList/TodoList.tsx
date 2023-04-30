@@ -1,6 +1,5 @@
 import React from 'react';
 import { useGetProjectsQuery } from './services/apiSlice';
-import { useState } from 'react';
 import Project from './Project';
 import NewProjectForm from './NewProjectForm';
 import { Navigate } from 'react-router-dom';

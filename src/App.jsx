@@ -6,15 +6,14 @@ import {
   Route
 } from "react-router-dom";
 
-function App(props) {
+function App() {
   return (
-    <div>
-      <Routes>
-        <Route path="/" element={<TodoList/>} />
-        <Route path="/login" element={<Login/>} />
-      </Routes>
-    </div>
+    <Routes>
+      <Route path="/" element={<TodoList/>} />
+      <Route path="/login" element={<Login/>} />
+    </Routes>
   );
 }
-
+  
 export default App;
+  

@@ -2,7 +2,7 @@
 
 module Mutations
   class TaskRemove < BaseMutation
-    description "Removes a task"
+    description 'Removes a task'
 
     field :task, Types::TaskType, null: false
 
@@ -10,7 +10,9 @@ module Mutations
 
     def resolve(id:)
       task = ::Task.find(id)
-      raise GraphQL::ExecutionError.new "Error removing task", extensions: task.errors.to_hash unless task.destroy
+      unless task.destroy
+        raise GraphQL::ExecutionError.new 'Error removing task', extensions: task.errors.to_hash
+      end
 
       { task: task }
     end

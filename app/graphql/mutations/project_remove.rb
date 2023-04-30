@@ -1,6 +1,8 @@
+# frozen_string_literal: true
+
 module Mutations
   class ProjectRemove < BaseMutation
-    description "Removes a project"
+    description 'Removes a project'
 
     field :project, Types::ProjectType, null: true
 
@@ -8,7 +10,10 @@ module Mutations
 
     def resolve(id:)
       project = ::Project.find(id)
-      raise GraphQL::ExecutionError.new "Error removing project", extensions: project.errors.to_hash unless project.destroy
+      unless project.destroy
+        raise GraphQL::ExecutionError.new 'Error removing project',
+                                          extensions: project.errors.to_hash
+      end
 
       { project: project }
     end
