@@ -1,5 +1,5 @@
 import React from 'react';
-import { useState } from 'react';
+import { useState, useRef, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { setToken } from './todoList/features/authSlice';
 import { Navigate } from "react-router-dom";
@@ -12,6 +12,13 @@ const Login: React.FC = () => {
   const [login, { isLoading, error }] = useLoginMutation();
   const token = useSelector((state: RootState) => state.auth.token);
   const dispatch = useDispatch();
+  const submitButtonRef = useRef<HTMLInputElement>(null);
+
+  useEffect(() => {
+    if (submitButtonRef.current) {
+      submitButtonRef.current.focus();
+    }
+  }, []);
 
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -52,7 +59,7 @@ const Login: React.FC = () => {
         <div className="invalid-feedback">
           Please provide a password.
         </div>
-        <input className="btn btn-primary" type="submit" value="login"/>
+        <input className="btn btn-primary" type="submit" value="login" ref={submitButtonRef} />
       </form>
     </div>
   );
