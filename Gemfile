@@ -11,7 +11,7 @@ gem 'bootsnap', require: false
 gem 'graphql'
 gem 'graphiql-rails'
 gem 'jwt'
-gem 'pg', '~> 1.4'
+gem 'pg', '~> 1.5'
 gem 'puma', '~> 5.6'
 gem 'rack-cors'
 gem 'rails'
