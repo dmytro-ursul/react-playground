@@ -15,9 +15,8 @@ gem 'pg', '~> 1.4'
 gem 'puma', '~> 5.6'
 gem 'rack-cors'
 gem 'rails'
-gem 'pry-rails'
-gem 'pry-nav'
-gem 'pry-stack_explorer'
+gem 'sunspot_rails'
+gem 'sunspot_solr'
 
 # Build JSON APIs with ease [https://github.com/rails/jbuilder]
 # gem "jbuilder"
@@ -31,7 +30,8 @@ gem 'pry-stack_explorer'
 
 group :development, :test do
   # See https://guides.rubyonrails.org/debugging_rails_applications.html#debugging-with-the-debug-gem
-  gem 'debug', platforms: %i[mri mingw x64_mingw]
+  gem 'debug'
+  gem 'faker'
 end
 
 group :development do

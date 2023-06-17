@@ -24,4 +24,5 @@ class Task < ApplicationRecord
   belongs_to :project
 
   validates :name, presence: true
+  validates :completed, inclusion: { in: [true, false] }
 end
