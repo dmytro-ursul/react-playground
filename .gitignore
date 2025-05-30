@@ -35,3 +35,4 @@ solr/pids
 tmp/
 log/
 .vscode
+.bundle

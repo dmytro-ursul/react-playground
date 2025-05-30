@@ -20,7 +20,7 @@ AllCops:
     - '.git/**/*'
     - 'bin/*'
     - 'Gemfile'
-  TargetRubyVersion: 2.6
+  TargetRubyVersion: 3.3
   SuggestExtensions: false
 
 Style/Documentation:

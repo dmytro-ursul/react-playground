@@ -3,7 +3,7 @@
 source 'https://rubygems.org'
 git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
-ruby '3.1.2'
+ruby '3.3.5'
 
 gem 'annotate'
 gem 'bcrypt', '~> 3.1.7'
@@ -11,10 +11,12 @@ gem 'bootsnap', require: false
 gem 'graphql'
 gem 'graphiql-rails'
 gem 'jwt'
-gem 'pg', '~> 1.4'
-gem 'puma', '~> 5.6'
+gem 'pg', '~> 1.5.4'
+gem 'puma', '~> 6.4'
 gem 'rack-cors'
-gem 'rails'
+gem 'rails', '~> 7.1.0'
+gem 'nio4r', '~> 2.7.0' # Specify newer nio4r version compatible with Ruby 3.3.5
+gem 'sprockets-rails'
 gem 'sunspot_rails'
 gem 'sunspot_solr'
 
