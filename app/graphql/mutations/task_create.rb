@@ -10,7 +10,7 @@ module Mutations
     argument :project_id, Integer, required: true
 
     def resolve(name:, project_id:)
-      task = ::Task.new(name: name, project_id: project_id)
+      task = ::Task.new(name: name, project_id: project_id, completed: false)
       unless task.save
         raise GraphQL::ExecutionError.new 'Error creating task', extensions: task.errors.to_hash
       end
