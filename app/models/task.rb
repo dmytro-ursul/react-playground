@@ -25,4 +25,28 @@ class Task < ApplicationRecord
 
   validates :name, presence: true
   validates :completed, inclusion: { in: [true, false] }
+
+  before_create :set_position
+  
+  scope :ordered, -> { order(:position) }
+
+  def set_position
+    self.position = project.tasks.maximum(:position).to_i + 1
+  end
+
+  def move_to_position(new_position)
+    old_position = position
+    return if old_position == new_position
+
+    transaction do
+      if new_position < old_position
+        project.tasks.where(position: new_position...old_position)
+                     .update_all('position = position + 1')
+      else
+        project.tasks.where(position: (old_position + 1)..new_position)
+                     .update_all('position = position - 1')
+      end
+      update!(position: new_position)
+    end
+  end
 end
