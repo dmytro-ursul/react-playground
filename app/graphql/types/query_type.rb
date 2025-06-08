@@ -16,7 +16,7 @@ module Types
 
     def projects
       if context[:current_user].present?
-        context[:current_user].projects
+        context[:current_user].projects.ordered
       else
         []
       end

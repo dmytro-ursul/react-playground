@@ -6,7 +6,9 @@ import {
   REMOVE_PROJECT,
   CREATE_TASK,
   UPDATE_TASK,
-  REMOVE_TASK
+  REMOVE_TASK,
+  UPDATE_PROJECT_POSITION,
+  UPDATE_TASK_POSITION
 } from '../queries/projects';
 import { SIGN_IN } from '../queries/auth';
 import { graphqlRequestBaseQuery } from '@rtk-query/graphql-request-base-query';
@@ -91,6 +93,20 @@ export const apiSlice = createApi({
       query: (id: number) => ({
         document: REMOVE_TASK,
         variables: {id},
+      }),
+      invalidatesTags: ['Project'],
+    }),
+    updateProjectPosition: builder.mutation({
+      query: ({ id, position }: { id: string; position: number }) => ({
+        document: UPDATE_PROJECT_POSITION,
+        variables: { id, position },
+      }),
+      invalidatesTags: ['Project'],
+    }),
+    updateTaskPosition: builder.mutation({
+      query: ({ id, position }: { id: string; position: number }) => ({
+        document: UPDATE_TASK_POSITION,
+        variables: { id, position },
       }),
       invalidatesTags: ['Project'],
     }),

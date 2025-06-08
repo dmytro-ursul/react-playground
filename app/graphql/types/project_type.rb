@@ -6,6 +6,7 @@ module Types
 
     field :id, Integer, null: false
     field :name, String, null: false
+    field :position, Integer, null: true
     field :created_at, GraphQL::Types::ISO8601DateTime, null: false
     field :updated_at, GraphQL::Types::ISO8601DateTime, null: false
     field :tasks, [TaskType], null: false

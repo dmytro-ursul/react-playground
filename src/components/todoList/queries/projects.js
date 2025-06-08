@@ -5,10 +5,12 @@ export const GET_PROJECTS = gql`
     projects {
       id
       name
+      position
       tasks {
         id
         name
         completed
+        position
       }
     }
   }
@@ -78,6 +80,28 @@ export const REMOVE_TASK = gql`
     removeTask(input: { id: $id }) {
       task {
         id
+      }
+    }
+  }
+`;
+
+export const UPDATE_PROJECT_POSITION = gql`
+  mutation UpdateProjectPosition($id: ID!, $position: Int!) {
+    updateProjectPosition(input: { id: $id, position: $position }) {
+      project {
+        id
+        position
+      }
+    }
+  }
+`;
+
+export const UPDATE_TASK_POSITION = gql`
+  mutation UpdateTaskPosition($id: ID!, $position: Int!) {
+    updateTaskPosition(input: { id: $id, position: $position }) {
+      task {
+        id
+        position
       }
     }
   }

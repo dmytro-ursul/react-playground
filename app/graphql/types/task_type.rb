@@ -5,6 +5,7 @@ module Types
     field :id, ID, null: false
     field :name, String
     field :completed, Boolean
+    field :position, Integer, null: true
     field :project_id, Integer, null: false
     field :created_at, GraphQL::Types::ISO8601DateTime, null: false
     field :updated_at, GraphQL::Types::ISO8601DateTime, null: false
