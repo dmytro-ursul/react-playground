@@ -1,20 +1,22 @@
 import React from 'react';
 import { useGetProjectsQuery } from './services/apiSlice';
-import Project from './Project';
 import NewProjectForm from './NewProjectForm';
 import { Navigate } from 'react-router-dom';
 import {useDispatch, useSelector} from "react-redux";
 import {setToken} from "./features/authSlice";
 import {RootState} from "../../store";
+import SortableProjectList from './SortableProjectList';
 
 interface ProjectProps {
   id: number;
   name: string;
+  position: number;
   tasks?: {
     id: number;
     name: string;
     projectId: number;
     completed: boolean;
+    position: number;
   }[];
 }
 
@@ -40,10 +42,6 @@ const TodoList = () => {
     return <p>Error :(</p>;
   }
 
-  const projectList = projects.map((project: ProjectProps) => (
-    <Project key={project.id} id={project.id} name={project.name} tasks={project.tasks} />
-  ));
-
   return (
     <div>
       { token ? null : <Navigate to="/login" />}
@@ -53,7 +51,7 @@ const TodoList = () => {
       </button>
       <span className="right m-r-30">{user.firstName} {user.lastName}</span>
       <NewProjectForm />
-      <div id="project-list">{projectList}</div>
+      <SortableProjectList projects={projects} />
     </div>
   );
 }

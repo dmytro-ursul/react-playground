@@ -1,29 +1,27 @@
 import React from 'react';
 import ProjectHeader from './ProjectHeader';
 import TaskForm from './TaskForm';
-import Task from './Task';
+import SortableTaskList from './SortableTaskList';
 
 interface ProjectProps {
   id: number;
   name: string;
+  position?: number;
   tasks?: {
     id: number;
     name: string;
     projectId: number;
     completed: boolean;
+    position: number;
   }[];
 }
 
-export default function Project({ id, name, tasks = [] }: ProjectProps): JSX.Element {
+export default function Project({ id, name, position, tasks = [] }: ProjectProps): JSX.Element {
   return (
     <div className="project">
       <ProjectHeader name={name} id={id} />
       <TaskForm projectId={id} />
-      <div className="task-list">
-        {tasks.map((task) => (
-          <Task id={task.id} key={task.id} name={task.name} completed={task.completed} projectId={id} />
-        ))}
-      </div>
+      <SortableTaskList tasks={tasks} projectId={id} />
     </div>
   );
 }
