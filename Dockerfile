@@ -1,5 +1,5 @@
 # Use the official Ruby base image
-FROM ruby:3.1.2
+FROM ruby:3.2.2
 RUN curl -fsSL https://deb.nodesource.com/setup_16.x | bash - \
     && curl -fsSL https://dl.yarnpkg.com/debian/pubkey.gpg | gpg --dearmor -o /usr/share/keyrings/yarn-archive-keyring.gpg \
     && echo "deb [signed-by=/usr/share/keyrings/yarn-archive-keyring.gpg] https://dl.yarnpkg.com/debian stable main" | tee /etc/apt/sources.list.d/yarn.list \
