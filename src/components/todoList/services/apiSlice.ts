@@ -122,4 +122,6 @@ export const {
   useCreateTaskMutation,
   useUpdateTaskMutation,
   useRemoveTaskMutation,
+  useUpdateProjectPositionMutation,
+  useUpdateTaskPositionMutation,
 } = apiSlice;

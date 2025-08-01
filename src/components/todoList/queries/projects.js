@@ -11,6 +11,7 @@ export const GET_PROJECTS = gql`
         name
         completed
         position
+        projectId
       }
     }
   }

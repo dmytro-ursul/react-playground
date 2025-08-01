@@ -4,7 +4,7 @@ import { useUpdateTaskPositionMutation } from './services/apiSlice';
 import './DragDrop.css';
 
 interface TaskProps {
-  id: number;
+  id: string;
   name: string;
   projectId: number;
   completed: boolean;
@@ -20,13 +20,14 @@ const SortableTaskList: React.FC<SortableTaskListProps> = ({ tasks, projectId })
   const [draggingId, setDraggingId] = useState<number | null>(null);
   const [dropTargetId, setDropTargetId] = useState<number | null>(null);
   const [updateTaskPosition] = useUpdateTaskPositionMutation();
-  
+
   // Sort tasks by position
   const sortedTasks = [...tasks].sort((a, b) => a.position - b.position);
 
-  const handleDragStart = (e: React.DragEvent<HTMLDivElement>, id: number) => {
-    setDraggingId(id);
-    e.dataTransfer.setData('text/plain', id.toString());
+  const handleDragStart = (e: React.DragEvent<HTMLDivElement>, id: string) => {
+    setDraggingId(Number(id));
+    e.dataTransfer.setData('text/plain', id);
+    e.dataTransfer.setData('application/x-task', id);
     // Add a custom class to the dragged element for styling
     e.currentTarget.classList.add('dragging');
   };
@@ -34,43 +35,61 @@ const SortableTaskList: React.FC<SortableTaskListProps> = ({ tasks, projectId })
   const handleDragEnd = (e: React.DragEvent<HTMLDivElement>) => {
     e.currentTarget.classList.remove('dragging');
     setDraggingId(null);
+    setDropTargetId(null);
   };
 
-  const handleDragOver = (e: React.DragEvent<HTMLDivElement>) => {
+  const handleDragOver = (e: React.DragEvent<HTMLDivElement>, id: string) => {
+    // Only allow task drops
+    if (!e.dataTransfer.types.includes('application/x-task')) {
+      return;
+    }
     e.preventDefault();
     e.dataTransfer.dropEffect = 'move';
+    setDropTargetId(Number(id));
   };
 
-  const handleDrop = (e: React.DragEvent<HTMLDivElement>, targetId: number) => {
+  const handleDrop = (e: React.DragEvent<HTMLDivElement>, targetId: string) => {
+
+    // Only allow task drops
+    if (!e.dataTransfer.types.includes('application/x-task')) {
+      return;
+    }
+
     e.preventDefault();
-    const sourceId = parseInt(e.dataTransfer.getData('text/plain'), 10);
-    
-    if (sourceId === targetId) return;
-    
+    const sourceId = e.dataTransfer.getData('application/x-task'); // Keep as string
+
+    if (sourceId === targetId) {
+      return;
+    }
+
+
     const sourceIndex = sortedTasks.findIndex(t => t.id === sourceId);
     const targetIndex = sortedTasks.findIndex(t => t.id === targetId);
-    
-    if (sourceIndex === -1 || targetIndex === -1) return;
-    
-    // Calculate new position
-    let newPosition: number;
-    
-    if (targetIndex === 0) {
-      // Moving to the first position
-      newPosition = sortedTasks[0].position / 2;
-    } else if (targetIndex === sortedTasks.length - 1) {
-      // Moving to the last position
-      newPosition = sortedTasks[targetIndex].position + 1;
-    } else if (sourceIndex < targetIndex) {
-      // Moving down
-      newPosition = (sortedTasks[targetIndex].position + sortedTasks[targetIndex + 1].position) / 2;
-    } else {
-      // Moving up
-      newPosition = (sortedTasks[targetIndex - 1].position + sortedTasks[targetIndex].position) / 2;
+
+    if (sourceIndex === -1 || targetIndex === -1) {
+      return;
     }
-    
+
+    // Ensure both tasks belong to the same project
+    const sourceTask = sortedTasks[sourceIndex];
+    const targetTask = sortedTasks[targetIndex];
+
+    if (sourceTask.projectId !== targetTask.projectId) {
+      return;
+    }
+
+    // The new position should be the target's current position
+    // The backend will handle shifting other items
+    const newPosition = sortedTasks[targetIndex].position;
+
     // Update the position in the backend
-    updateTaskPosition({ id: sourceId.toString(), position: newPosition });
+    updateTaskPosition({ id: sourceId, position: newPosition })
+      .unwrap()
+      .then((result) => {
+      })
+      .catch((error) => {
+        console.error('Task position update failed:', error);
+      });
   };
 
   return (
@@ -78,18 +97,22 @@ const SortableTaskList: React.FC<SortableTaskListProps> = ({ tasks, projectId })
       {sortedTasks.map((task) => (
         <div
           key={task.id}
-          draggable
-          onDragStart={(e) => handleDragStart(e, task.id)}
-          onDragEnd={handleDragEnd}
-          onDragOver={handleDragOver}
+          onDragOver={(e) => handleDragOver(e, task.id)}
           onDrop={(e) => handleDrop(e, task.id)}
-          className={`task-container ${draggingId === task.id ? 'dragging' : ''}`}
+          className={`task-container ${draggingId === Number(task.id) ? 'dragging' : ''} ${dropTargetId === Number(task.id) ? 'drop-target' : ''}`}
         >
-          <div className="drag-handle">&#9776;</div>
-          <Task 
-            id={task.id} 
-            name={task.name} 
-            completed={task.completed} 
+          <div
+            className="drag-handle"
+            draggable
+            onDragStart={(e) => handleDragStart(e, task.id)}
+            onDragEnd={handleDragEnd}
+          >
+            &#9776;
+          </div>
+          <Task
+            id={task.id}
+            name={task.name}
+            completed={task.completed}
             projectId={projectId}
           />
         </div>

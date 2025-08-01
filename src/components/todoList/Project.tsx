@@ -8,7 +8,7 @@ interface ProjectProps {
   name: string;
   position?: number;
   tasks?: {
-    id: number;
+    id: string;
     name: string;
     projectId: number;
     completed: boolean;

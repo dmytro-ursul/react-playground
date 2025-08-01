@@ -12,7 +12,7 @@ interface ProjectProps {
   name: string;
   position: number;
   tasks?: {
-    id: number;
+    id: string;
     name: string;
     projectId: number;
     completed: boolean;
@@ -28,10 +28,15 @@ const TodoList = () => {
     data: { projects } = { projects: [] },
     error,
     isLoading,
-  } = useGetProjectsQuery({ skip: !token });
+  } = useGetProjectsQuery(undefined, { skip: !token });
 
   const removeToken = () => {
     dispatch(setToken(null));
+  }
+
+  // Redirect to login if no token
+  if (!token) {
+    return <Navigate to="/login" />;
   }
 
   if (isLoading) {
@@ -44,7 +49,6 @@ const TodoList = () => {
 
   return (
     <div>
-      { token ? null : <Navigate to="/login" />}
       {/*display user fullname*/}
       <button className="btn btn-primary logout right" onClick={() => removeToken()}>
         Logout

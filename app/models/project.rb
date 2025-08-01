@@ -6,14 +6,16 @@
 #
 #  id         :bigint           not null, primary key
 #  name       :string
+#  position   :integer
 #  created_at :datetime         not null
 #  updated_at :datetime         not null
 #  user_id    :bigint
 #
 # Indexes
 #
-#  index_projects_on_name     (name)
-#  index_projects_on_user_id  (user_id)
+#  index_projects_on_name      (name)
+#  index_projects_on_position  (position)
+#  index_projects_on_user_id   (user_id)
 #
 # Foreign Keys
 #

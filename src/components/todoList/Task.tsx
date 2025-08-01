@@ -5,7 +5,7 @@ import {
 } from './services/apiSlice';
 
 type Props = {
-  id: number,
+  id: string,
   name: string,
   projectId: number,
   completed: boolean

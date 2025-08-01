@@ -1,8 +1,9 @@
 .project-container {
-  cursor: grab;
   transition: background-color 0.2s ease;
   margin-bottom: 10px;
   border-radius: 4px;
+  display: flex;
+  align-items: flex-start;
 }
 
 .project-container:hover {
@@ -16,10 +17,11 @@
 }
 
 .task-container {
-  cursor: grab;
   transition: background-color 0.2s ease;
   margin-bottom: 5px;
   border-radius: 4px;
+  display: flex;
+  align-items: center;
 }
 
 .task-container:hover {
@@ -44,12 +46,30 @@
   color: #ccc;
   margin-right: 8px;
   display: inline-block;
+  padding: 4px;
+  user-select: none;
+  font-size: 14px;
 }
 
 .drag-handle:hover {
   color: #999;
+  background-color: rgba(0, 0, 0, 0.05);
+  border-radius: 2px;
 }
 
 .dragging .drag-handle {
   cursor: grabbing;
+}
+
+/* Make sure the project/task content takes up remaining space */
+.project-container .project,
+.task-container .task {
+  flex: 1;
+}
+
+/* Visual feedback for invalid drop targets */
+.project-container.invalid-drop-target,
+.task-container.invalid-drop-target {
+  cursor: not-allowed;
+  background-color: rgba(255, 0, 0, 0.1);
 }

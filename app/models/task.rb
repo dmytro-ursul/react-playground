@@ -7,14 +7,16 @@
 #  id         :bigint           not null, primary key
 #  completed  :boolean
 #  name       :string
+#  position   :integer
 #  created_at :datetime         not null
 #  updated_at :datetime         not null
 #  project_id :bigint           not null
 #
 # Indexes
 #
-#  index_tasks_on_name        (name)
-#  index_tasks_on_project_id  (project_id)
+#  index_tasks_on_name                     (name)
+#  index_tasks_on_project_id               (project_id)
+#  index_tasks_on_project_id_and_position  (project_id,position)
 #
 # Foreign Keys
 #
