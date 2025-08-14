@@ -17,8 +17,7 @@ gem 'rack-cors'
 gem 'rails', '~> 7.1.0'
 gem 'nio4r', '~> 2.7.0' # Specify newer nio4r version compatible with Ruby 3.3.5
 gem 'sprockets-rails'
-gem 'sunspot_rails'
-gem 'sunspot_solr'
+
 
 # Build JSON APIs with ease [https://github.com/rails/jbuilder]
 # gem "jbuilder"

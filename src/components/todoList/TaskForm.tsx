@@ -16,17 +16,17 @@ const TaskForm = ({ projectId }: { projectId: number }) => {
   };
 
   return (
-    <form className="task-form" onSubmit={handleSubmit}>
-      <div className="input-group-sm flex">
-        <input
-          type="text"
-          className="text-enter"
-          value={name}
-          onChange={handleChange}
-          placeholder="Please enter task name"
-        />
-        <input className="task-add btn btn-primary" type="submit" value="add task" />
-      </div>
+    <form className="task-add-form" onSubmit={handleSubmit}>
+      <input
+        type="text"
+        className="text-enter"
+        value={name}
+        onChange={handleChange}
+        placeholder="✨ Add a new task..."
+      />
+      <button className="task-add" type="submit">
+        Add Task
+      </button>
     </form>
   );
 };

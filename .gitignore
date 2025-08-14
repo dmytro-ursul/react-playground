@@ -24,11 +24,7 @@ yarn-error.log*
 .idea/
 .env
 .env.*
-solr/data
-solr/test/data
-solr/development/data
-solr/default/data
-solr/pids
+
 
 # Ignore master key for decrypting credentials and more.
 /config/master.key

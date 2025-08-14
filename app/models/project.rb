@@ -31,9 +31,7 @@ class Project < ApplicationRecord
   
   scope :ordered, -> { order(:position) }
 
-  searchable do
-    text :name
-  end
+
 
   def set_position
     self.position = user.projects.maximum(:position).to_i + 1

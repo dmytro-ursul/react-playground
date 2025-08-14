@@ -19,8 +19,12 @@ const Task = ({ id, name, projectId, completed }: Props) => {
   const handleSubmit = (event: React.KeyboardEvent<HTMLInputElement>) => {
     event.preventDefault();
     const newName = (event.target as HTMLInputElement).value;
-    updateTask({id: +id, name: newName, projectId: +projectId, completed: false});
+    updateTask({id: +id, name: newName, projectId: +projectId, completed});
     setIsEditing(false);
+  };
+
+  const toggleCompleted = () => {
+    updateTask({id: +id, name, projectId: +projectId, completed: !completed});
   };
 
   const editTask = () => {
@@ -37,6 +41,13 @@ const Task = ({ id, name, projectId, completed }: Props) => {
 
   return (
     <div className="task-box">
+      <input
+        type="checkbox"
+        checked={completed}
+        onChange={toggleCompleted}
+        className="task-checkbox"
+        aria-label={`Mark task "${name}" as ${completed ? 'incomplete' : 'complete'}`}
+      />
       {isEditing ? (
         <form>
           <input
@@ -47,7 +58,7 @@ const Task = ({ id, name, projectId, completed }: Props) => {
           />
         </form>
       ) : (
-        <p className="task" onClick={editTask}>
+        <p className={`task ${completed ? 'completed' : ''}`} onClick={editTask}>
           {name}
         </p>
       )}

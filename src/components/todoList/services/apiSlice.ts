@@ -28,7 +28,7 @@ interface SignInResponse {
 export const apiSlice = createApi({
   reducerPath: 'api',
   baseQuery: graphqlRequestBaseQuery({
-    url: AppSettings.apiUrl ?? "http://localhost:3051/graphql",
+    url: AppSettings.apiUrl ?? "http://localhost:3001/graphql",
     prepareHeaders: (headers, { getState }) => {
       const token = (getState() as RootState).auth.token;
 

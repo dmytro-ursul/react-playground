@@ -15,7 +15,7 @@ module Mutations
       if user&.authenticate(password)
         { token: jwt_encode(user_id: user.id), user: user }
       else
-        { error: 'Invalid username or password' }
+        raise GraphQL::ExecutionError, 'Invalid username or password'
       end
     end
   end

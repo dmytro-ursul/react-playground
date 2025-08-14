@@ -33,34 +33,40 @@ const Login: React.FC = () => {
   };
 
   return (
-    <div>
+    <div className="login-container">
       { token ? <Navigate to="/" /> : null }
-      <form className="needs-validation" action="http://localhost:3051/sessions" method="post" onSubmit={handleSubmit} noValidate>
-        <input
-          className="form-control"
-          type="text"
-          name="username"
-          placeholder="username"
-          value={username}
-          onChange={(e) => setUserName(e.target.value)}
-          required
-        />
-        <div className="invalid-feedback">
-          Please provide a username.
+      <form className="login-form" onSubmit={handleSubmit}>
+        <h2>Welcome Back</h2>
+
+        <div className="form-group">
+          <label htmlFor="username">Username</label>
+          <input
+            id="username"
+            type="text"
+            name="username"
+            placeholder="Enter your username"
+            value={username}
+            onChange={(e) => setUserName(e.target.value)}
+            required
+          />
         </div>
-        <input
-          className="form-control"
-          type="password"
-          name="password"
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
-          placeholder="password"
-          required
-        />
-        <div className="invalid-feedback">
-          Please provide a password.
+
+        <div className="form-group">
+          <label htmlFor="password">Password</label>
+          <input
+            id="password"
+            type="password"
+            name="password"
+            placeholder="Enter your password"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+            required
+          />
         </div>
-        <input className="btn btn-primary" type="submit" value="login" ref={submitButtonRef} />
+
+        <button type="submit">
+          Sign In
+        </button>
       </form>
     </div>
   );
