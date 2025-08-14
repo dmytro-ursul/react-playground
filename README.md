@@ -1,4 +1,38 @@
-# Getting Started with Create React App
+# ✨ React Todo App
+
+A beautiful, modern todo application built with React, Redux Toolkit, and GraphQL.
+
+## 🚀 Live Demo
+
+**[View Live App](https://emiltrotuar.github.io/react-playground/)**
+
+## 🎯 Features
+
+- ✅ **Task Management**: Create, edit, delete, and complete tasks
+- 📋 **Project Organization**: Organize tasks into projects
+- 🎨 **Beautiful UI**: Modern glass-morphism design with gradients
+- 📱 **Responsive**: Works perfectly on desktop and mobile
+- 🔐 **Authentication**: Secure login system
+- 🎭 **Animations**: Smooth transitions and hover effects
+- ⚡ **Real-time Updates**: Instant UI updates
+
+## 🔧 Demo Credentials
+
+```
+Username: john.doe
+Password: password
+```
+
+## 🛠️ Tech Stack
+
+- **React 18** with TypeScript
+- **Redux Toolkit** for state management
+- **RTK Query** for data fetching
+- **Ruby on Rails 7** backend with GraphQL
+- **PostgreSQL** database
+- **Modern CSS** with glass-morphism design
+
+---
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 

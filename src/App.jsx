@@ -1,5 +1,6 @@
 import TodoList from 'components/todoList/TodoList';
 import Login from 'components/Login';
+import './App.css';
 
 import {
   Routes,
@@ -16,4 +17,3 @@ function App() {
 }
   
 export default App;
-  

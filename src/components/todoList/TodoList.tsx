@@ -7,18 +7,7 @@ import {setToken} from "./features/authSlice";
 import {RootState} from "../../store";
 import SortableProjectList from './SortableProjectList';
 
-interface ProjectProps {
-  id: number;
-  name: string;
-  position: number;
-  tasks?: {
-    id: string;
-    name: string;
-    projectId: number;
-    completed: boolean;
-    position: number;
-  }[];
-}
+
 
 const TodoList = () => {
   const token = useSelector((state: RootState) => state.auth.token);
