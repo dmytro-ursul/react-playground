@@ -30,9 +30,10 @@
    ```
 
 5. **Deploy**
-   - Railway will automatically build and deploy your app
+   - Railway will automatically detect Rails and use Nixpacks
    - The build process will run `bundle install` and `rails db:migrate`
    - Seeds will be run automatically via the release command
+   - No Docker configuration needed - Nixpacks handles everything!
 
 ## Step 2: Update Frontend
 
@@ -90,12 +91,13 @@ Password: password
 - Ensure all environment variables are set
 
 ## Railway Features Used
-- ✅ Automatic Rails detection
+- ✅ Nixpacks automatic Rails detection
 - ✅ PostgreSQL database
 - ✅ Environment variables
 - ✅ Health checks
 - ✅ Automatic deployments
 - ✅ Release commands (migrations)
+- ✅ Zero-config deployment
 
 ## Cost
 - Railway offers $5/month in free credits
