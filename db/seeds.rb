@@ -1,45 +1,75 @@
-user = User.create!(
+# Create demo user for production
+unless User.exists?(username: "john.doe")
+  user = User.create!(
     email: "john.doe@test.com",
     username: "john.doe",
     first_name: "John",
     last_name: "Doe",
     password: "password"
-)
+  )
 
-2.times do
-    project = Project.create!(
-        name: Faker::Lorem.sentence(word_count: 3),
-        user: user
-    )
-    5.times do
-        Task.create!(
-            name: Faker::Lorem.sentence(word_count: 3),
-            completed: Faker::Boolean.boolean,
-            project: project
-        )
-    end
-end
+  # Create sample projects and tasks for demo
+  project1 = Project.create!(
+    name: "Frontend Development",
+    user: user
+  )
 
-3000.times do |i|
-    user = User.create!(
-        email: Faker::Internet.email,
-        username: Faker::Internet.username + rand(1..1000).to_s,
-        first_name: Faker::Name.first_name,
-        last_name: Faker::Name.last_name,
-        password: "password"
-    )
+  project2 = Project.create!(
+    name: "Backend API",
+    user: user
+  )
 
-    rand(1..5).times do
-        project = Project.create!(
-            name: Faker::Lorem.sentence(word_count: 3),
-            user: user
-        )
-        rand(2..10).times do
-            Task.create!(
-                name: Faker::Lorem.sentence(word_count: 3),
-                completed: Faker::Boolean.boolean,
-                project: project
-            )
-        end
-    end
+  # Tasks for Frontend Development
+  Task.create!(
+    name: "Add task completion feature",
+    completed: false,
+    project: project1
+  )
+
+  Task.create!(
+    name: "Update React dependencies",
+    completed: true,
+    project: project1
+  )
+
+  Task.create!(
+    name: "Fix CSS styling issues",
+    completed: false,
+    project: project1
+  )
+
+  Task.create!(
+    name: "Write unit tests",
+    completed: false,
+    project: project1
+  )
+
+  # Tasks for Backend API
+  Task.create!(
+    name: "Setup GraphQL mutations",
+    completed: true,
+    project: project2
+  )
+
+  Task.create!(
+    name: "Add user authentication",
+    completed: true,
+    project: project2
+  )
+
+  Task.create!(
+    name: "Implement task CRUD operations",
+    completed: false,
+    project: project2
+  )
+
+  Task.create!(
+    name: "Deploy to Railway",
+    completed: false,
+    project: project2
+  )
+
+  puts "Demo user and sample data created successfully!"
+else
+  puts "Demo user already exists, skipping seed data creation."
 end
