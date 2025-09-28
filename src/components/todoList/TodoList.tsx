@@ -23,6 +23,19 @@ const TodoList = () => {
     dispatch(setToken(null));
   }
 
+  // Handle JWT expiration errors
+  React.useEffect(() => {
+    if (error) {
+      const errorMessage = (error as any)?.message || '';
+      if (errorMessage.includes('Signature has expired') ||
+          errorMessage.includes('jwt expired') ||
+          errorMessage.includes('token expired')) {
+        // Token has expired, clear it and redirect to login
+        dispatch(setToken(null));
+      }
+    }
+  }, [error, dispatch]);
+
   // Redirect to login if no token
   if (!token) {
     return <Navigate to="/login" />;

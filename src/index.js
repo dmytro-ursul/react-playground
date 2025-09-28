@@ -17,7 +17,7 @@ root.render(
   <React.StrictMode>
     <ApiProvider api={apiSlice}>
       <Provider store={store}>
-        <BrowserRouter>
+        <BrowserRouter future={{ v7_startTransition: true, v7_relativeSplatPath: true }}>
           <App/>
         </BrowserRouter>
       </Provider>

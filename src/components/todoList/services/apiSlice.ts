@@ -14,6 +14,7 @@ import { SIGN_IN } from '../queries/auth';
 import { graphqlRequestBaseQuery } from '@rtk-query/graphql-request-base-query';
 import type { RootState } from '../../../store';
 import AppSettings from '../../../settings';
+import { setToken } from '../features/authSlice';
 
 interface SignInResponse {
   signIn: {
@@ -25,20 +26,47 @@ interface SignInResponse {
   };
 }
 
+// Custom base query with JWT expiration handling
+const baseQueryWithAuth = graphqlRequestBaseQuery({
+  url: AppSettings.apiUrl as string,
+  prepareHeaders: (headers, { getState }) => {
+    const token = (getState() as RootState).auth.token;
+
+    if (token) {
+      headers.set('authorization', `Bearer ${token}`);
+    }
+
+    return headers;
+  },
+});
+
+const baseQueryWithReauth = async (args: any, api: any, extraOptions: any) => {
+  let result = await baseQueryWithAuth(args, api, extraOptions);
+
+  // Check if the error is due to JWT expiration
+  if (result.error) {
+    const errorMessage = result.error.message || '';
+
+    // Handle JWT expiration errors
+    if (errorMessage.includes('Signature has expired') ||
+        errorMessage.includes('jwt expired') ||
+        errorMessage.includes('token expired') ||
+        (result.error as any)?.status === 500) {
+
+      // Clear the expired token
+      api.dispatch(setToken(null));
+
+      // Optionally, you could try to refresh the token here
+      // For now, we'll just clear it and force re-login
+    }
+  }
+
+  return result;
+};
+
 export const apiSlice = createApi({
   reducerPath: 'api',
-  baseQuery: graphqlRequestBaseQuery({
-    url: AppSettings.apiUrl ?? "http://localhost:3001/graphql",
-    prepareHeaders: (headers, { getState }) => {
-      const token = (getState() as RootState).auth.token;
-
-      if (token) {
-        headers.set('authorization', `Bearer ${token}`);
-      }
-
-      return headers;
-    },
-  }),
+  baseQuery: baseQueryWithReauth,
   tagTypes: ['Project'],
   endpoints: (builder) => ({
     login: builder.mutation<SignInResponse, { username: string; password: string }>({

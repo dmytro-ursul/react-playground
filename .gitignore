@@ -23,7 +23,8 @@ yarn-debug.log*
 yarn-error.log*
 .idea/
 .env
-.env.*
+.env.development
+.env.test
 
 
 # Ignore master key for decrypting credentials and more.
@@ -32,3 +33,5 @@ tmp/
 log/
 .vscode
 .bundle
+/vendor/bundle
+/vendor/ruby

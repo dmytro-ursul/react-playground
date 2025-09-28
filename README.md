@@ -4,7 +4,7 @@ A beautiful, modern todo application built with React, Redux Toolkit, and GraphQ
 
 ## 🚀 Live Demo
 
-**[View Live App](https://emiltrotuar.github.io/react-playground/)**
+**Deployed on Railway** - Full-stack application with separate frontend and backend services.
 
 ## 🎯 Features
 

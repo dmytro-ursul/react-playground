@@ -1,13 +1,13 @@
 [build]
-builder = "nixpacks"
+buildCommand = "bundle install"
 
 [deploy]
+preDeployCommand = "bundle exec rails db:prepare"
+startCommand = "bundle exec puma -C config/puma.rb"
 healthcheckPath = "/health"
 healthcheckTimeout = 300
-restartPolicyType = "on_failure"
-restartPolicyMaxRetries = 3
+restartPolicyType = "never"
 
 [env]
-RAILS_ENV = "production"
 RAILS_SERVE_STATIC_FILES = "true"
 RAILS_LOG_TO_STDOUT = "true"
