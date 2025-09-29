@@ -2,7 +2,6 @@
 buildCommand = "bundle install"
 
 [deploy]
-preDeployCommand = "bundle exec rails db:prepare"
 startCommand = "bundle exec puma -C config/puma.rb"
 healthcheckPath = "/health"
 healthcheckTimeout = 300
