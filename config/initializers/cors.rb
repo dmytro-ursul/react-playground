@@ -2,11 +2,9 @@
 
 Rails.application.config.middleware.insert_before 0, Rack::Cors do
   allow do
-    # Allow Railway frontend and localhost for development
     origins [
       'http://localhost:3000',
       'http://127.0.0.1:3000',
-      # Railway frontend URL will be added via environment variable
       ENV['FRONTEND_URL']
     ].compact
     resource '*',
