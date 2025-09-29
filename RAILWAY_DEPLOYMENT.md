@@ -1,22 +1,24 @@
-# 🚀 Railway Monorepo Deployment Guide
+# 🚀 Railway Deployment Guide
 
-This guide explains how to deploy the React Playground as a **monorepo** with separate frontend and backend services on Railway.
+This guide explains how to deploy the React Playground with **separate frontend and backend** services on Railway.
 
 ## 🏗️ Architecture Overview
 
 ```
-react-playground/
-├── 🎯 Frontend Service (React) → Railway
+react-playground/              # Backend Repository
 ├── ⚙️  Backend Service (Rails)  → Railway
 ├── 🗄️  Database Service (PostgreSQL) → Railway
-├── railway.toml (backend config)
-└── railway-frontend.toml (frontend config)
+└── railway.toml (backend config)
+
+../react-playground-front/     # Frontend Directory
+├── 🎯 Frontend Service (React) → Railway
+└── railway.toml (frontend config)
 ```
 
 ## Prerequisites
-- GitHub account with this repository
+- GitHub account with access to both repositories
 - Railway account (sign up at railway.app)
-- Understanding of Railway monorepo deployment
+- Understanding of Railway deployment
 
 ## Step 1: Deploy Backend Service (Rails API)
 

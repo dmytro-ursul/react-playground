@@ -1,6 +1,21 @@
-# ✨ React Todo App
+# 🚀 React Playground - Rails Backend
 
-A beautiful, modern todo application built with React, Redux Toolkit, and GraphQL.
+This is the **Rails GraphQL API backend** for the React Playground application. The frontend has been moved to a separate repository for better organization.
+
+## 📁 Project Structure
+
+```
+react-playground/          # Rails Backend (this repo)
+├── app/                  # Rails application
+├── config/              # Configuration
+├── db/                  # Database migrations & schema
+└── lib/                 # Custom tasks
+
+../react-playground-front/ # React Frontend (separate directory)
+├── src/                 # React components
+├── public/              # Static assets
+└── package.json         # Frontend dependencies
+```
 
 ## 🚀 Live Demo
 
@@ -8,13 +23,11 @@ A beautiful, modern todo application built with React, Redux Toolkit, and GraphQ
 
 ## 🎯 Features
 
-- ✅ **Task Management**: Create, edit, delete, and complete tasks
-- 📋 **Project Organization**: Organize tasks into projects
-- 🎨 **Beautiful UI**: Modern glass-morphism design with gradients
-- 📱 **Responsive**: Works perfectly on desktop and mobile
-- 🔐 **Authentication**: Secure login system
-- 🎭 **Animations**: Smooth transitions and hover effects
-- ⚡ **Real-time Updates**: Instant UI updates
+- ✅ **GraphQL API**: Modern API with GraphQL
+- 🔐 **Authentication**: JWT-based authentication
+- 📋 **Task Management**: CRUD operations for tasks and projects
+- 🗄️ **PostgreSQL**: Robust database with migrations
+- 🚀 **Railway Ready**: Configured for Railway deployment
 
 ## 🔧 Demo Credentials
 
@@ -25,80 +38,106 @@ Password: password
 
 ## 🛠️ Tech Stack
 
-- **React 18** with TypeScript
-- **Redux Toolkit** for state management
-- **RTK Query** for data fetching
-- **Ruby on Rails 7** backend with GraphQL
+- **Ruby on Rails 7** with GraphQL
 - **PostgreSQL** database
-- **Modern CSS** with glass-morphism design
+- **JWT** authentication
+- **Railway** deployment platform
 
----
+## 🏃‍♂️ Quick Start
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+### Backend (Rails API)
+```bash
+bundle install
+rails db:setup
+rails server
+```
 
-## Available Scripts
+### Frontend (React App)
+```bash
+cd ../react-playground-front
+npm install
+npm start
+```
 
-In the project directory, you can run:
+## 🛠️ Development Commands
 
-### `npm start`
+### Backend (Rails API)
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+```bash
+# Install dependencies
+bundle install
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+# Setup database
+rails db:setup
 
-### `npm test`
+# Run migrations
+rails db:migrate
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+# Seed database with demo data
+rails db:seed
 
-### `npm run build`
+# Start Rails server
+rails server
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+# Run tests
+bundle exec rspec
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+# Rails console
+rails console
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+# Check routes
+rails routes
+```
 
-### `npm run eject`
+### Frontend (React App)
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+```bash
+# Navigate to frontend directory
+cd ../react-playground-front
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+# Install dependencies
+npm install
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+# Start development server
+npm start
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+# Run tests
+npm test
 
-## Learn More
+# Build for production
+npm run build
+```
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+## 🚀 API Endpoints
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+### GraphQL Endpoint
+- **URL**: `http://localhost:3000/graphql`
+- **GraphiQL**: `http://localhost:3000/graphiql` (development only)
 
-### Code Splitting
+### Health Check
+- **URL**: `http://localhost:3000/health`
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+### Authentication
+- **Login**: POST to `/sessions`
 
-### Analyzing the Bundle Size
+## 🗄️ Database Schema
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+The application uses PostgreSQL with the following main models:
+- **User**: Authentication and user management
+- **Project**: Task organization
+- **Task**: Individual todo items
 
-### Making a Progressive Web App
+## 🚢 Deployment
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+This backend is configured for Railway deployment. See `RAILWAY_DEPLOYMENT.md` for detailed deployment instructions.
 
-### Advanced Configuration
+### Environment Variables
+- `DATABASE_URL`: PostgreSQL connection string
+- `RAILS_MASTER_KEY`: Rails credentials key
+- `RAILS_ENV`: Environment (production)
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+## 📚 Learn More
 
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+- [Ruby on Rails Guides](https://guides.rubyonrails.org/)
+- [GraphQL Ruby](https://graphql-ruby.org/)
+- [Railway Documentation](https://docs.railway.app/)
