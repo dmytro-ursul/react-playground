@@ -6,6 +6,7 @@
 #
 #  id         :bigint           not null, primary key
 #  completed  :boolean
+#  due_date   :date
 #  name       :string
 #  position   :integer
 #  created_at :datetime         not null

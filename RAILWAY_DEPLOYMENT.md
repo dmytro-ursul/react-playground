@@ -112,8 +112,10 @@ FRONTEND_URL=https://react-playground-frontend-production-[id].railway.app
 ## Demo Credentials
 ```
 Username: john.doe
-Password: password
+Password: Password123!
 ```
+
+**Note:** Password uses strong password validation (uppercase, lowercase, digit, and special character).
 
 ### Backend Issues
 - Check Railway logs in the dashboard

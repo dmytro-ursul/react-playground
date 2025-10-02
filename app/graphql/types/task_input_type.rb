@@ -6,5 +6,6 @@ module Types
     argument :name, String, required: false
     argument :project_id, Integer, required: false
     argument :completed, Boolean, required: false
+    argument :due_date, GraphQL::Types::ISO8601Date, required: false
   end
 end

@@ -3,6 +3,7 @@
 module Types
   class MutationType < Types::BaseObject
     field :sign_in, mutation: Mutations::Login
+    field :change_password, mutation: Mutations::ChangePassword
 
     field :create_project, mutation: Mutations::ProjectCreate
     field :update_project, mutation: Mutations::ProjectUpdate

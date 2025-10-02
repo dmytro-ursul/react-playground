@@ -33,8 +33,10 @@ react-playground/          # Rails Backend (this repo)
 
 ```
 Username: john.doe
-Password: password
+Password: Password123!
 ```
+
+**Note:** Password now requires strong password validation (uppercase, lowercase, digit, and special character).
 
 ## 🛠️ Tech Stack
 

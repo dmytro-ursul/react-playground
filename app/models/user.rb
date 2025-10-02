@@ -20,6 +20,21 @@ class User < ApplicationRecord
   has_many :projects, dependent: :destroy
 
   validates :email, presence: true, uniqueness: true
-  validates :password, presence: true, length: { minimum: 8 }
   validates :username, presence: true, uniqueness: true
+
+  # Strong password validation
+  validates :password,
+    presence: true,
+    length: { minimum: 8 },
+    format: {
+      with: /\A(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]+\z/,
+      message: 'must include at least one lowercase letter, one uppercase letter, one digit, and one special character (@$!%*?&)'
+    },
+    if: :password_required?
+
+  private
+
+  def password_required?
+    password_digest.nil? || password.present?
+  end
 end

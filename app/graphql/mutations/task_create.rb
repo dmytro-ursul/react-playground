@@ -8,9 +8,15 @@ module Mutations
 
     argument :name, String, required: true
     argument :project_id, Integer, required: true
+    argument :due_date, GraphQL::Types::ISO8601Date, required: false
 
-    def resolve(name:, project_id:)
-      task = ::Task.new(name: name, project_id: project_id, completed: false)
+    def resolve(name:, project_id:, due_date: nil)
+      task = ::Task.new(
+        name: name,
+        project_id: project_id,
+        completed: false,
+        due_date: due_date
+      )
       unless task.save
         raise GraphQL::ExecutionError.new 'Error creating task', extensions: task.errors.to_hash
       end
