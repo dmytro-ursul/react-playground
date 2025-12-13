@@ -15,14 +15,12 @@ module Types
     end
 
     def projects
-      if context[:current_user].present?
-        context[:current_user].projects.ordered
-      else
-        []
-      end
+      raise GraphQL::ExecutionError, 'Unauthorized: Please log in' unless context[:current_user].present?
+      context[:current_user].projects.ordered
     end
 
     def project(id:)
+      raise GraphQL::ExecutionError, 'Unauthorized: Please log in' unless context[:current_user].present?
       context[:current_user].projects.find(id)
     end
   end

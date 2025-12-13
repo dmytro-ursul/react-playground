@@ -13,7 +13,14 @@ class GraphqlController < ApplicationController
     context = { current_user: current_user }
     result = ReactPlaygroundSchema.execute(query, variables: variables, context: context,
                                                   operation_name: operation_name)
-    render json: result
+    
+    # Check if result contains authorization errors
+    result_hash = result.to_h
+    if result_hash['errors']&.any? { |e| e['message']&.include?('Unauthorized') }
+      render json: result_hash, status: :unauthorized
+    else
+      render json: result_hash
+    end
   rescue StandardError => e
     raise e unless Rails.env.development?
 

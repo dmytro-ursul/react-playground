@@ -29,8 +29,8 @@ class User < ApplicationRecord
     presence: true,
     length: { minimum: 8 },
     format: {
-      with: /\A(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]+\z/,
-      message: 'must include at least one lowercase letter, one uppercase letter, one digit, and one special character (@$!%*?&)'
+      with: /\A(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&_\-.\+=])[A-Za-z\d@$!%*?&_\-.\+=]+\z/,
+      message: 'must include at least one lowercase letter, one uppercase letter, one digit, and one special character (@$!%*?&_-.+=)'
     },
     if: :password_required?
 
