@@ -14,6 +14,8 @@ module Types
       argument :id, ID, required: true
     end
 
+    field :current_user, UserType, 'Returns the currently logged in user', null: true
+
     def projects
       raise GraphQL::ExecutionError, 'Unauthorized: Please log in' unless context[:current_user].present?
       context[:current_user].projects.ordered
@@ -22,6 +24,10 @@ module Types
     def project(id:)
       raise GraphQL::ExecutionError, 'Unauthorized: Please log in' unless context[:current_user].present?
       context[:current_user].projects.find(id)
+    end
+
+    def current_user
+      context[:current_user]
     end
   end
 end

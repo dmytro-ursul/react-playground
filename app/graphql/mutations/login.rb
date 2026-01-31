@@ -7,8 +7,10 @@ module Mutations
     argument :username, String, required: true
     argument :password, String, required: true
 
-    field :token, String, null: false
-    field :user, Types::UserType, null: false
+    field :token, String, null: true
+    field :user, Types::UserType, null: true
+    field :requires_two_factor, Boolean, null: false
+    field :temp_token, String, null: true
 
     def resolve(username:, password:)
       user = User.find_by(username: username)
@@ -25,9 +27,27 @@ module Mutations
 
       # Attempt authentication
       if user.authenticate(password)
-        # Successful login - reset failed attempts
-        user.reset_failed_attempts!
-        { token: jwt_encode(user_id: user.id), user: user }
+        # Check if 2FA is required
+        if user.two_factor_required?
+          # Issue temporary token for 2FA verification (short-lived)
+          temp_token = jwt_encode({ user_id: user.id, temp_token: true }, 5.minutes.from_now)
+          
+          {
+            token: nil,
+            user: nil,
+            requires_two_factor: true,
+            temp_token: temp_token
+          }
+        else
+          # No 2FA - successful login
+          user.reset_failed_attempts!
+          {
+            token: jwt_encode(user_id: user.id),
+            user: user,
+            requires_two_factor: false,
+            temp_token: nil
+          }
+        end
       else
         # Failed login - record attempt and potentially lock account
         user.record_failed_attempt!

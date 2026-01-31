@@ -90,6 +90,7 @@ GEM
       msgpack (~> 1.2)
     brakeman (5.3.1)
     builder (3.2.4)
+    chunky_png (1.4.0)
     concurrent-ruby (1.1.10)
     connection_pool (2.5.3)
     crass (1.0.6)
@@ -198,6 +199,11 @@ GEM
     reline (0.3.1)
       io-console (~> 0.5)
     rexml (3.2.5)
+    rotp (6.3.0)
+    rqrcode (2.2.0)
+      chunky_png (~> 1.0)
+      rqrcode_core (~> 1.0)
+    rqrcode_core (1.2.0)
     rubocop (1.45.1)
       json (~> 2.3)
       parallel (~> 1.10)
@@ -261,6 +267,8 @@ DEPENDENCIES
   puma (~> 6.4)
   rack-cors
   rails (~> 7.1.0)
+  rotp (~> 6.3)
+  rqrcode (~> 2.2)
   rubocop
   rubocop-performance
   rubocop-rails

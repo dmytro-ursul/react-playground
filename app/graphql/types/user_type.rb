@@ -7,5 +7,6 @@ module Types
     field :email, String, null: true
     field :first_name, String, null: true
     field :last_name, String, null: true
+    field :otp_enabled, Boolean, null: false
   end
 end

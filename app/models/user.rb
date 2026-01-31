@@ -11,6 +11,8 @@
 #  last_name       :string           default(""), not null
 #  locked_until    :datetime
 #  name            :string
+#  otp_enabled     :boolean          default(FALSE), not null
+#  otp_secret      :string
 #  password_digest :string
 #  username        :string
 #  created_at      :datetime         not null
@@ -38,6 +40,9 @@ class User < ApplicationRecord
   ATTEMPTS_PER_LOCKOUT = 5
   BASE_LOCKOUT_MINUTES = 10
   MAX_LOCKOUT_MINUTES = 300 # 5 hours
+
+  # 2FA constants
+  OTP_ISSUER = 'TodoApp'
 
   # Check if account is currently locked
   def locked?
@@ -87,6 +92,47 @@ class User < ApplicationRecord
     else
       "Account is locked. Please try again in #{remaining} second#{'s' if remaining > 1}."
     end
+  end
+
+  # === 2FA Methods ===
+
+  # Generate a new OTP secret for setup
+  def generate_otp_secret!
+    update!(otp_secret: ROTP::Base32.random)
+    otp_secret
+  end
+
+  # Get TOTP object
+  def totp
+    return nil unless otp_secret.present?
+    ROTP::TOTP.new(otp_secret, issuer: OTP_ISSUER)
+  end
+
+  # Verify OTP code
+  def verify_otp(code)
+    return false unless otp_secret.present?
+    totp.verify(code, drift_behind: 30, drift_ahead: 30).present?
+  end
+
+  # Enable 2FA after verification
+  def enable_otp!
+    update!(otp_enabled: true)
+  end
+
+  # Disable 2FA
+  def disable_otp!
+    update!(otp_enabled: false, otp_secret: nil)
+  end
+
+  # Generate provisioning URI for QR code
+  def otp_provisioning_uri
+    return nil unless otp_secret.present?
+    totp.provisioning_uri(email)
+  end
+
+  # Check if 2FA is required for this user
+  def two_factor_required?
+    otp_enabled?
   end
 
   private

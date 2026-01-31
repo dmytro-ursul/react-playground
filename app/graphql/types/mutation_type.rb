@@ -5,6 +5,12 @@ module Types
     field :sign_in, mutation: Mutations::Login
     field :change_password, mutation: Mutations::ChangePassword
 
+    # 2FA mutations
+    field :setup_two_factor, mutation: Mutations::SetupTwoFactor
+    field :enable_two_factor, mutation: Mutations::EnableTwoFactor
+    field :disable_two_factor, mutation: Mutations::DisableTwoFactor
+    field :verify_two_factor, mutation: Mutations::VerifyTwoFactor
+
     field :create_project, mutation: Mutations::ProjectCreate
     field :update_project, mutation: Mutations::ProjectUpdate
     field :remove_project, mutation: Mutations::ProjectRemove
