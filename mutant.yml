@@ -1,0 +1,13 @@
+usage: opensource
+
+integration:
+  name: rspec
+  arguments:
+    - spec
+
+requires:
+  - ./config/environment
+
+mutation:
+  timeout: 10.0
+

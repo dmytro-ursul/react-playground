@@ -19,7 +19,7 @@
 #  updated_at      :datetime         not null
 #
 class User < ApplicationRecord
-  has_secure_password
+  has_secure_password validations: false
 
   has_many :projects, dependent: :destroy
 
@@ -138,6 +138,6 @@ class User < ApplicationRecord
   private
 
   def password_required?
-    password_digest.nil? || password.present?
+    new_record? || password.present?
   end
 end

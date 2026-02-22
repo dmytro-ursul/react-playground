@@ -120,7 +120,7 @@ Password: Password123!
 ### Backend Issues
 - Check Railway logs in the dashboard
 - Ensure all gems are in the Gemfile
-- Verify Ruby version matches (3.3.5)
+- Verify Ruby version matches (3.3.10)
 - Ensure PostgreSQL service is connected
 
 ### Frontend Issues

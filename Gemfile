@@ -3,7 +3,7 @@
 source 'https://rubygems.org'
 git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
-ruby '3.3.5'
+ruby '3.3.10'
 
 gem 'annotate'
 gem 'bcrypt', '~> 3.1.7'
@@ -17,7 +17,7 @@ gem 'rack-cors'
 gem 'rails', '~> 7.1.0'
 gem 'rotp', '~> 6.3'  # TOTP 2FA
 gem 'rqrcode', '~> 2.2'  # QR code generation
-gem 'nio4r', '~> 2.7.0' # Specify newer nio4r version compatible with Ruby 3.3.5
+gem 'nio4r', '~> 2.7.0' # Specify newer nio4r version compatible with Ruby 3.3.10
 gem 'sprockets-rails'
 
 
@@ -36,10 +36,12 @@ group :development, :test do
   # See https://guides.rubyonrails.org/debugging_rails_applications.html#debugging-with-the-debug-gem
   gem 'debug'
   gem 'faker'
+  gem 'rspec-rails', '~> 7.1.0'
 end
 
 group :development do
   gem 'brakeman', require: false
+  gem 'mutant-rspec', '~> 0.10', require: false
   gem 'rubocop', require: false
   gem 'rubocop-performance', require: false
   gem 'rubocop-rails', require: false
