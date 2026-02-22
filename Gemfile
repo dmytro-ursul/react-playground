@@ -35,12 +35,16 @@ group :development, :test do
   gem 'dotenv-rails'
   # See https://guides.rubyonrails.org/debugging_rails_applications.html#debugging-with-the-debug-gem
   gem 'debug'
+  gem 'pry'
   gem 'faker'
   gem 'rspec-rails', '~> 7.1.0'
 end
 
 group :development do
   gem 'brakeman', require: false
+  gem 'spring'
+  gem 'spring-commands-rspec'
+  gem 'spring-watcher-listen'
   gem 'mutant-rspec', '~> 0.10', require: false
   gem 'rubocop', require: false
   gem 'rubocop-performance', require: false
