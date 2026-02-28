@@ -63,4 +63,18 @@ RSpec.describe Project, type: :model do
     expect(second.reload.position).to eq(3)
     expect(third.reload.position).to eq(1)
   end
+
+  it 'restores soft-deleted project and its tasks' do
+    user = create_user
+    project = user.projects.create!(name: 'Restorable')
+    task = Task.create!(project: project, name: 'Restore me', completed: false)
+
+    project.update!(deleted_at: Time.current)
+    task.update!(deleted_at: Time.current)
+
+    project.restore!
+
+    expect(project.reload.deleted_at).to be_nil
+    expect(task.reload.deleted_at).to be_nil
+  end
 end
