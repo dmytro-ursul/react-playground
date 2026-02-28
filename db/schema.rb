@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2026_01_31_215342) do
+ActiveRecord::Schema[7.1].define(version: 2026_02_28_230000) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -20,6 +20,8 @@ ActiveRecord::Schema[7.1].define(version: 2026_01_31_215342) do
     t.datetime "updated_at", null: false
     t.bigint "user_id"
     t.integer "position"
+    t.datetime "deleted_at"
+    t.index ["deleted_at"], name: "index_projects_on_deleted_at"
     t.index ["name"], name: "index_projects_on_name"
     t.index ["position"], name: "index_projects_on_position"
     t.index ["user_id"], name: "index_projects_on_user_id"
@@ -33,6 +35,8 @@ ActiveRecord::Schema[7.1].define(version: 2026_01_31_215342) do
     t.datetime "updated_at", null: false
     t.integer "position"
     t.date "due_date"
+    t.datetime "deleted_at"
+    t.index ["deleted_at"], name: "index_tasks_on_deleted_at"
     t.index ["name"], name: "index_tasks_on_name"
     t.index ["project_id", "position"], name: "index_tasks_on_project_id_and_position"
     t.index ["project_id"], name: "index_tasks_on_project_id"

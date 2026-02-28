@@ -18,12 +18,12 @@ module Types
 
     def projects
       raise GraphQL::ExecutionError, 'Unauthorized: Please log in' unless context[:current_user].present?
-      context[:current_user].projects.ordered
+      context[:current_user].projects.visible.ordered
     end
 
     def project(id:)
       raise GraphQL::ExecutionError, 'Unauthorized: Please log in' unless context[:current_user].present?
-      context[:current_user].projects.find(id)
+      context[:current_user].projects.visible.find(id)
     end
 
     def current_user

@@ -6,6 +6,7 @@
 #
 #  id         :bigint           not null, primary key
 #  completed  :boolean
+#  deleted_at :datetime
 #  due_date   :date
 #  name       :string
 #  position   :integer
@@ -15,6 +16,7 @@
 #
 # Indexes
 #
+#  index_tasks_on_deleted_at               (deleted_at)
 #  index_tasks_on_name                     (name)
 #  index_tasks_on_project_id               (project_id)
 #  index_tasks_on_project_id_and_position  (project_id,position)

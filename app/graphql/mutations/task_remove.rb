@@ -9,8 +9,15 @@ module Mutations
     argument :id, Integer, required: true
 
     def resolve(id:)
-      task = ::Task.find(id)
-      unless task.destroy
+      user = context[:current_user]
+      raise GraphQL::ExecutionError, 'Unauthorized: Please log in' unless user
+
+      task = ::Task.joins(:project)
+                   .where(projects: { user_id: user.id, deleted_at: nil })
+                   .where(deleted_at: nil)
+                   .find(id)
+
+      unless task.update(deleted_at: Time.current)
         raise GraphQL::ExecutionError.new 'Error removing task', extensions: task.errors.to_hash
       end
 

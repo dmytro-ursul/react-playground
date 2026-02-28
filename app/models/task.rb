@@ -7,6 +7,7 @@
 #  id         :bigint           not null, primary key
 #  completed  :boolean
 #  due_date   :date
+#  deleted_at :datetime
 #  name       :string
 #  position   :integer
 #  created_at :datetime         not null
@@ -18,6 +19,7 @@
 #  index_tasks_on_name                     (name)
 #  index_tasks_on_project_id               (project_id)
 #  index_tasks_on_project_id_and_position  (project_id,position)
+#  index_tasks_on_deleted_at               (deleted_at)
 #
 # Foreign Keys
 #
@@ -32,6 +34,7 @@ class Task < ApplicationRecord
   before_create :set_position
   
   scope :ordered, -> { order(:position) }
+  scope :visible, -> { where(deleted_at: nil) }
 
   def set_position
     self.position = project.tasks.maximum(:position).to_i + 1

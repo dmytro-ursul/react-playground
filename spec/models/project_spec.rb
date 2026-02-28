@@ -5,6 +5,7 @@
 # Table name: projects
 #
 #  id         :bigint           not null, primary key
+#  deleted_at :datetime
 #  name       :string
 #  position   :integer
 #  created_at :datetime         not null
@@ -13,9 +14,10 @@
 #
 # Indexes
 #
-#  index_projects_on_name      (name)
-#  index_projects_on_position  (position)
-#  index_projects_on_user_id   (user_id)
+#  index_projects_on_deleted_at  (deleted_at)
+#  index_projects_on_name        (name)
+#  index_projects_on_position    (position)
+#  index_projects_on_user_id     (user_id)
 #
 # Foreign Keys
 #
