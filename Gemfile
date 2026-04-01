@@ -18,6 +18,7 @@ gem 'rails', '~> 7.1.0'
 gem 'rotp', '~> 6.3'  # TOTP 2FA
 gem 'rqrcode', '~> 2.2'  # QR code generation
 gem 'nio4r', '~> 2.7.0' # Specify newer nio4r version compatible with Ruby 3.3.10
+gem 'rufus-scheduler', '~> 3.9'
 gem 'sprockets-rails'
 gem 'webpush'
 
