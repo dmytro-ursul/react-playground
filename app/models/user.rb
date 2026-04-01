@@ -22,6 +22,7 @@ class User < ApplicationRecord
   has_secure_password validations: false
 
   has_many :projects, dependent: :destroy
+  has_many :push_subscriptions, dependent: :destroy
 
   validates :email, presence: true, uniqueness: true
   validates :username, presence: true, uniqueness: true

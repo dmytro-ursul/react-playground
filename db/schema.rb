@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2026_02_28_230000) do
+ActiveRecord::Schema[7.1].define(version: 2026_03_25_090000) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -27,6 +27,18 @@ ActiveRecord::Schema[7.1].define(version: 2026_02_28_230000) do
     t.index ["user_id"], name: "index_projects_on_user_id"
   end
 
+  create_table "push_subscriptions", force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.text "endpoint", null: false
+    t.string "p256dh_key", null: false
+    t.string "auth_key", null: false
+    t.datetime "expiration_time"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["endpoint"], name: "index_push_subscriptions_on_endpoint", unique: true
+    t.index ["user_id"], name: "index_push_subscriptions_on_user_id"
+  end
+
   create_table "tasks", force: :cascade do |t|
     t.string "name"
     t.boolean "completed"
@@ -36,10 +48,12 @@ ActiveRecord::Schema[7.1].define(version: 2026_02_28_230000) do
     t.integer "position"
     t.date "due_date"
     t.datetime "deleted_at"
+    t.date "push_notified_on"
     t.index ["deleted_at"], name: "index_tasks_on_deleted_at"
     t.index ["name"], name: "index_tasks_on_name"
     t.index ["project_id", "position"], name: "index_tasks_on_project_id_and_position"
     t.index ["project_id"], name: "index_tasks_on_project_id"
+    t.index ["push_notified_on"], name: "index_tasks_on_push_notified_on"
   end
 
   create_table "users", force: :cascade do |t|
@@ -58,5 +72,6 @@ ActiveRecord::Schema[7.1].define(version: 2026_02_28_230000) do
   end
 
   add_foreign_key "projects", "users"
+  add_foreign_key "push_subscriptions", "users"
   add_foreign_key "tasks", "projects"
 end

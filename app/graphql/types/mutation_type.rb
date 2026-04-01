@@ -20,5 +20,8 @@ module Types
     field :update_task, mutation: Mutations::TaskUpdate
     field :remove_task, mutation: Mutations::TaskRemove
     field :update_task_position, mutation: Mutations::TaskUpdatePosition
+    field :register_push_subscription, mutation: Mutations::RegisterPushSubscription
+    field :unregister_push_subscription, mutation: Mutations::UnregisterPushSubscription
+    field :send_test_push_notification, mutation: Mutations::SendTestPushNotification
   end
 end

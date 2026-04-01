@@ -4,15 +4,16 @@
 #
 # Table name: tasks
 #
-#  id         :bigint           not null, primary key
-#  completed  :boolean
-#  deleted_at :datetime
-#  due_date   :date
-#  name       :string
-#  position   :integer
-#  created_at :datetime         not null
-#  updated_at :datetime         not null
-#  project_id :bigint           not null
+#  id               :bigint           not null, primary key
+#  completed        :boolean
+#  deleted_at       :datetime
+#  due_date         :date
+#  name             :string
+#  position         :integer
+#  push_notified_on :date
+#  created_at       :datetime         not null
+#  updated_at       :datetime         not null
+#  project_id       :bigint           not null
 #
 # Indexes
 #
@@ -20,6 +21,7 @@
 #  index_tasks_on_name                     (name)
 #  index_tasks_on_project_id               (project_id)
 #  index_tasks_on_project_id_and_position  (project_id,position)
+#  index_tasks_on_push_notified_on         (push_notified_on)
 #
 # Foreign Keys
 #
