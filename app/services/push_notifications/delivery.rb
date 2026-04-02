@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-require 'webpush'
+require 'web_push'
 
 module PushNotifications
   class Delivery
@@ -8,7 +8,7 @@ module PushNotifications
       def call(subscription:, title:, body:, tag: nil, url: '/', require_interaction: false)
         return false unless Config.configured?
 
-        Webpush.payload_send(
+        WebPush.payload_send(
           endpoint: subscription.endpoint,
           p256dh: subscription.p256dh_key,
           auth: subscription.auth_key,

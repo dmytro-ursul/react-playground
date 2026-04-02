@@ -2,7 +2,7 @@
 
 require 'json'
 require 'fileutils'
-require 'webpush'
+require 'web_push'
 require 'openssl'
 require 'base64'
 

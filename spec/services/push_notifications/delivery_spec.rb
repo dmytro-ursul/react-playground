@@ -30,7 +30,7 @@ RSpec.describe PushNotifications::Delivery do
   end
 
   it 'sends a web push payload with vapid credentials' do
-    allow(Webpush).to receive(:payload_send)
+    allow(WebPush).to receive(:payload_send)
 
     result = described_class.call(
       subscription: subscription,
@@ -41,7 +41,7 @@ RSpec.describe PushNotifications::Delivery do
     )
 
     expect(result).to be(true)
-    expect(Webpush).to have_received(:payload_send).with(
+    expect(WebPush).to have_received(:payload_send).with(
       hash_including(
         endpoint: subscription.endpoint,
         p256dh: subscription.p256dh_key,

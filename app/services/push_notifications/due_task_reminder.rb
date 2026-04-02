@@ -5,9 +5,12 @@ module PushNotifications
     class << self
       def call(date: Date.current)
         due_tasks(date).find_each do |task|
+          overdue = task.due_date < date
+          title = overdue ? "Overdue Task: #{task.name}" : "Task Due Today: #{task.name}"
+
           delivered = BroadcastToUser.call(
             user: task.project.user,
-            title: "Task Due Today: #{task.name}",
+            title: title,
             body: "Project: #{task.project.name}",
             tag: "task-due-#{task.id}-#{date}",
             url: '/',
@@ -25,7 +28,8 @@ module PushNotifications
             .joins(:project)
             .merge(Project.visible)
             .includes(project: :user)
-            .where(completed: false, due_date: date)
+            .where(completed: false)
+            .where('tasks.due_date <= ?', date)
             .where('tasks.push_notified_on IS NULL OR tasks.push_notified_on < ?', date)
       end
     end

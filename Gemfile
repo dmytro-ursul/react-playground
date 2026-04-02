@@ -20,7 +20,7 @@ gem 'rqrcode', '~> 2.2'  # QR code generation
 gem 'nio4r', '~> 2.7.0' # Specify newer nio4r version compatible with Ruby 3.3.10
 gem 'rufus-scheduler', '~> 3.9'
 gem 'sprockets-rails'
-gem 'webpush'
+gem 'web-push', '~> 3.1'
 
 
 # Build JSON APIs with ease [https://github.com/rails/jbuilder]
