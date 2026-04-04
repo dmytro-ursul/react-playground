@@ -61,6 +61,42 @@ npm install
 npm start
 ```
 
+## 🔒 Running Locally with TLS (required for push notifications)
+
+Push notifications require HTTPS. Use [mkcert](https://github.com/FiloSottile/mkcert) to generate a locally-trusted certificate.
+
+### 1. Install mkcert and generate certs (once)
+```bash
+brew install mkcert
+mkcert -install
+mkdir -p ~/github/certs
+cd ~/github/certs
+mkcert localhost 127.0.0.1 ::1
+```
+This creates `localhost+2.pem` and `localhost+2-key.pem` in `~/github/certs/`.
+
+### 2. Start the Rails backend (port 3001, HTTPS)
+```bash
+cd ~/github/react-playground
+SSL_CERT_PATH=~/github/certs/localhost+2.pem \
+SSL_KEY_PATH=~/github/certs/localhost+2-key.pem \
+PORT=3001 \
+bundle exec puma -C config/puma.rb
+```
+> ⚠️ Use `bundle exec puma` directly — `rails server` overrides puma.rb and ignores TLS config.
+
+### 3. Start the React frontend (port 3000, HTTPS)
+```bash
+cd ~/github/react-playground-front
+PORT=3000 \
+HTTPS=true \
+SSL_CRT_FILE=~/github/certs/localhost+2.pem \
+SSL_KEY_FILE=~/github/certs/localhost+2-key.pem \
+npm start
+```
+
+The app will be available at **https://localhost:3000** with the API at **https://localhost:3001**.
+
 ## 🛠️ Development Commands
 
 ### Backend (Rails API)

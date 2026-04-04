@@ -5,14 +5,14 @@ require 'web_push'
 module PushNotifications
   class Delivery
     class << self
-      def call(subscription:, title:, body:, tag: nil, url: '/', require_interaction: false)
+      def call(subscription:, title:, body:, tag: nil, url: '/', require_interaction: false, vibrate: nil)
         return false unless Config.configured?
 
         WebPush.payload_send(
           endpoint: subscription.endpoint,
           p256dh: subscription.p256dh_key,
           auth: subscription.auth_key,
-          message: payload(title:, body:, tag:, url:, require_interaction:),
+          message: payload(title:, body:, tag:, url:, require_interaction:, vibrate:),
           vapid: {
             subject: Config.subject,
             public_key: Config.public_key,
@@ -29,7 +29,7 @@ module PushNotifications
 
       private
 
-      def payload(title:, body:, tag:, url:, require_interaction:)
+      def payload(title:, body:, tag:, url:, require_interaction:, vibrate:)
         JSON.generate(
           title: title,
           options: {
@@ -38,6 +38,7 @@ module PushNotifications
             badge: '/favicon.ico',
             tag: tag,
             requireInteraction: require_interaction,
+            vibrate: vibrate,
             data: { url: url }
           }.compact
         )

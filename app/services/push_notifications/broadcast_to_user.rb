@@ -3,7 +3,7 @@
 module PushNotifications
   class BroadcastToUser
     class << self
-      def call(user:, title:, body:, tag: nil, url: '/', require_interaction: false)
+      def call(user:, title:, body:, tag: nil, url: '/', require_interaction: false, vibrate: nil)
         deliveries = user.push_subscriptions.find_each.filter_map do |subscription|
           Delivery.call(
             subscription: subscription,
@@ -11,7 +11,8 @@ module PushNotifications
             body: body,
             tag: tag,
             url: url,
-            require_interaction: require_interaction
+            require_interaction: require_interaction,
+            vibrate: vibrate
           )
         end
 

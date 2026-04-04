@@ -11,10 +11,11 @@ module PushNotifications
           delivered = BroadcastToUser.call(
             user: task.project.user,
             title: title,
-            body: "Project: #{task.project.name}",
+            body: "Project: #{task.project.name} · Due: #{task.due_date.strftime('%b %-d')}",
             tag: "task-due-#{task.id}-#{date}",
             url: '/',
-            require_interaction: false
+            require_interaction: false,
+            vibrate: [200, 100, 200]
           )
 
           task.update_column(:push_notified_on, date) if delivered
