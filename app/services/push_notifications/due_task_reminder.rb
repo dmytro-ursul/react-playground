@@ -13,7 +13,7 @@ module PushNotifications
             title: title,
             body: "Project: #{task.project.name} · Due: #{task.due_date.strftime('%b %-d')}",
             tag: "task-due-#{task.id}-#{date}",
-            url: '/',
+            url: "/?task=#{task.id}",
             require_interaction: false,
             vibrate: [200, 100, 200]
           )
