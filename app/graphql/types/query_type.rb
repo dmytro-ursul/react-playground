@@ -16,6 +16,7 @@ module Types
 
     field :current_user, UserType, 'Returns the currently logged in user', null: true
     field :push_notification_config, PushNotificationConfigType, null: true
+    field :active_sessions, [SessionType], null: false
 
     def projects
       raise GraphQL::ExecutionError, 'Unauthorized: Please log in' unless context[:current_user].present?
@@ -35,6 +36,12 @@ module Types
       return nil unless PushNotifications::Config.configured?
 
       { public_key: PushNotifications::Config.public_key }
+    end
+
+    def active_sessions
+      raise GraphQL::ExecutionError, 'Unauthorized: Please log in' unless context[:current_user].present?
+
+      context[:current_user].sessions.active.order(last_active_at: :desc)
     end
   end
 end

@@ -23,5 +23,8 @@ module Types
     field :register_push_subscription, mutation: Mutations::RegisterPushSubscription
     field :unregister_push_subscription, mutation: Mutations::UnregisterPushSubscription
     field :send_test_push_notification, mutation: Mutations::SendTestPushNotification
+    field :logout, mutation: Mutations::Logout
+    field :logout_all, mutation: Mutations::LogoutAll
+    field :revoke_session, mutation: Mutations::RevokeSession
   end
 end

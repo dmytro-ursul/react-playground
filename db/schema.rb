@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2026_03_25_090000) do
+ActiveRecord::Schema[7.1].define(version: 2026_04_14_214103) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -37,6 +37,18 @@ ActiveRecord::Schema[7.1].define(version: 2026_03_25_090000) do
     t.datetime "updated_at", null: false
     t.index ["endpoint"], name: "index_push_subscriptions_on_endpoint", unique: true
     t.index ["user_id"], name: "index_push_subscriptions_on_user_id"
+  end
+
+  create_table "sessions", force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.string "ip_address"
+    t.string "user_agent"
+    t.datetime "last_active_at", null: false
+    t.datetime "revoked_at"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id", "revoked_at"], name: "index_sessions_on_user_id_and_revoked_at"
+    t.index ["user_id"], name: "index_sessions_on_user_id"
   end
 
   create_table "tasks", force: :cascade do |t|
@@ -73,5 +85,6 @@ ActiveRecord::Schema[7.1].define(version: 2026_03_25_090000) do
 
   add_foreign_key "projects", "users"
   add_foreign_key "push_subscriptions", "users"
+  add_foreign_key "sessions", "users"
   add_foreign_key "tasks", "projects"
 end

@@ -42,9 +42,14 @@ module Mutations
 
       # Success - reset failed attempts and issue full token
       user.reset_failed_attempts!
-      
+      session = user.sessions.create!(
+        ip_address: context[:ip_address],
+        user_agent: context[:user_agent],
+        last_active_at: Time.current
+      )
+
       {
-        token: jwt_encode(user_id: user.id),
+        token: jwt_encode(user_id: user.id, session_id: session.id),
         user: user
       }
     end

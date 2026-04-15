@@ -10,7 +10,12 @@ class GraphqlController < ApplicationController
     variables = prepare_variables(params[:variables])
     query = params[:query]
     operation_name = params[:operationName]
-    context = { current_user: current_user }
+    context = {
+      current_user: current_user,
+      current_session: current_session,
+      ip_address: request.remote_ip,
+      user_agent: request.user_agent
+    }
     result = ReactPlaygroundSchema.execute(query, variables: variables, context: context,
                                                   operation_name: operation_name)
     
