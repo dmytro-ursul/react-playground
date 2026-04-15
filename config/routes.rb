@@ -8,5 +8,5 @@ Rails.application.routes.draw do
   get "health" => "rails/health#show"
 
   post '/graphql', to: 'graphql#execute'
-  resources :sessions, only: [:create]
+
 end
