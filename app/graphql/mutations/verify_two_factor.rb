@@ -16,8 +16,8 @@ module Mutations
       # Decode the temporary token to get user_id
       begin
         decoded = jwt_decode(temp_token)
-        user_id = decoded[:user_id]
-        is_temp = decoded[:temp_token]
+        user_id = decoded['user_id']
+        is_temp = decoded['temp_token']
 
         unless is_temp
           raise GraphQL::ExecutionError, 'Invalid token type'
