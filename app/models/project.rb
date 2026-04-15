@@ -56,10 +56,4 @@ class Project < ApplicationRecord
     end
   end
 
-  def restore!
-    transaction do
-      update!(deleted_at: nil)
-      Task.where(project_id: id).update_all(deleted_at: nil)
-    end
-  end
 end
